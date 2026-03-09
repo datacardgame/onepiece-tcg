@@ -273,7 +273,7 @@ let curSet='op01', prices={}, activeR=new Set(), stockOnly=false;
 async function init(){
   buildTabs(); buildChips();
   try{
-    const r=await fetch('prices.json');
+    const r=await fetch('prices_full.json');
     prices=await r.json();
   }catch(e){prices={};}
   render();
