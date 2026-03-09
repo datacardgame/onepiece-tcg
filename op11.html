@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OP-11 A Fist of Divine Speed — OPCG Price List</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+Thai:wght@300;400;600;700&display=swap');
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --dark: #0a0a0a;
+  --dark2: #141414;
+  --dark3: #1c1c1c;
+  --dark4: #222;
+  --red: #e83333;
+  --text: #e8e0d0;
+  --text-dim: #777;
+  --border: #2a2a2a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--dark); color: var(--text); font-family: 'Noto Sans Thai', sans-serif; min-height: 100vh; }
+
+/* ── NAV ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(10,10,10,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  height: 52px;
+  display: flex; align-items: center; gap: 0;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.topbar::-webkit-scrollbar { display: none; }
+.topbar-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  margin-right: 20px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-sep { width: 1px; height: 24px; background: #2a2a2a; margin: 0 6px; flex-shrink: 0; }
+.nav-btn {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-family: 'Noto Sans Thai', sans-serif;
+  color: var(--text-dim);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+  border: 1px solid transparent;
+}
+.nav-btn:hover { background: rgba(201,168,76,0.1); color: var(--gold-light); border-color: rgba(201,168,76,0.3); }
+.nav-btn.active { background: rgba(201,168,76,0.15); color: var(--gold); border-color: var(--gold); }
+.nav-btn .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  margin-top: 52px;
+  padding: 28px 24px 20px;
+  background: linear-gradient(180deg, #111 0%, var(--dark) 100%);
+  border-bottom: 1px solid var(--border);
+}
+.page-header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.set-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 0.2em; }
+.set-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: 0.06em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1; margin-top: 2px;
+}
+.set-meta { font-size: 0.78rem; color: var(--text-dim); margin-top: 6px; }
+.rate-pill { display: inline-block; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.4); border-radius: 20px; padding: 3px 10px; font-size: 0.72rem; color: var(--gold-light); }
+
+/* ── FILTER ── */
+.filter-wrap { max-width: 1400px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.filter-label-txt { font-size: 0.72rem; color: var(--text-dim); }
+.filter-btn {
+  padding: 3px 10px; border-radius: 12px; border: 1px solid #2a2a2a;
+  background: transparent; color: var(--text-dim); font-size: 0.7rem;
+  cursor: pointer; font-family: 'Noto Sans Thai', sans-serif;
+  transition: all 0.15s;
+}
+.filter-btn:hover { border-color: var(--gold); color: var(--gold-light); background: rgba(201,168,76,0.1); }
+.filter-btn.on { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.12); }
+.filter-divider { width: 1px; height: 16px; background: #2a2a2a; }
+
+/* ── GRID ── */
+.content { max-width: 1400px; margin: 0 auto; padding: 0 24px 60px; }
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+/* ── CARD ── */
+.card-item {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+  position: relative;
+}
+.card-item:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
+.card-img-wrap { position: relative; aspect-ratio: 5/7; background: #111; overflow: hidden; }
+.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.3s; }
+.card-img-wrap img.loading { opacity: 0; }
+.card-img-wrap img.loaded { opacity: 1; }
+.card-num-badge {
+  position: absolute; bottom: 5px; left: 5px;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+  border-radius: 3px; padding: 1px 5px;
+  font-size: 0.6rem; color: #aaa; font-family: monospace;
+}
+.rarity-pip {
+  position: absolute; top: 5px; right: 5px;
+  width: 7px; height: 7px; border-radius: 50%;
+}
+.card-info { padding: 6px 8px 8px; }
+.card-price-jpy { font-size: 0.88rem; font-weight: 700; color: var(--gold-light); }
+.card-price-thb { font-size: 0.72rem; color: #999; }
+.no-price { font-size: 0.7rem; color: #555; }
+.out-of-stock { font-size: 0.65rem; color: var(--red); margin-top: 2px; }
+
+/* rarity colors */
+.pip-psec { background:#ff3333; box-shadow:0 0 5px #ff3333; }
+.pip-sec  { background:#ff8c00; box-shadow:0 0 5px #ff8c00; }
+.pip-psr  { background:#c9a84c; box-shadow:0 0 4px #c9a84c; }
+.pip-sr   { background:#c0c0c0; box-shadow:0 0 4px #c0c0c0; }
+.pip-pr   { background:#7ab8ff; box-shadow:0 0 4px #7ab8ff; }
+.pip-r    { background:#4d9fff; }
+.pip-puc  { background:#c47aff; box-shadow:0 0 3px #c47aff; }
+.pip-uc   { background:#9955dd; }
+.pip-pc   { background:#66cc66; }
+.pip-c    { background:#555; }
+
+.card-item.has-price:hover { border-color: var(--gold-light); }
+.card-item.no-stock-item { opacity: 0.6; }
+
+/* link overlay */
+.card-link { position: absolute; inset: 0; z-index: 2; }
+
+/* view toggle */
+.view-toggle { display: flex; gap: 6px; }
+.view-btn { padding: 3px 10px; border-radius: 4px; border: 1px solid #2a2a2a; background: transparent; color: var(--text-dim); font-size: 0.7rem; cursor: pointer; font-family: 'Noto Sans Thai', sans-serif; transition: all 0.15s; }
+.view-btn.on { border-color: #555; color: var(--text); background: #222; }
+
+/* big grid mode */
+.cards-grid.big { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+.cards-grid.small { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 6px; }
+.cards-grid.small .card-info { padding: 4px 6px 6px; }
+.cards-grid.small .card-price-jpy { font-size: 0.78rem; }
+
+/* count badge */
+.count-badge { font-size: 0.75rem; color: var(--text-dim); margin-left: auto; }
+
+/* footer */
+.page-footer { text-align: center; font-size: 0.68rem; color: #444; padding: 20px; border-top: 1px solid #1a1a1a; }
+.page-footer a { color: #666; }
+</style>
+
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="topbar-brand" href="index.html">⚓ OPCG</a>
+  <div class="nav-sep"></div>
+  <a class="nav-btn" href="op01.html" id="nav-op01"><span class="dot"></span>OP-01</a><a class="nav-btn" href="op02.html" id="nav-op02"><span class="dot"></span>OP-02</a><a class="nav-btn" href="op03.html" id="nav-op03"><span class="dot"></span>OP-03</a><a class="nav-btn" href="op04.html" id="nav-op04"><span class="dot"></span>OP-04</a><a class="nav-btn" href="op05.html" id="nav-op05"><span class="dot"></span>OP-05</a><a class="nav-btn" href="op06.html" id="nav-op06"><span class="dot"></span>OP-06</a><a class="nav-btn" href="op07.html" id="nav-op07"><span class="dot"></span>OP-07</a><a class="nav-btn" href="op08.html" id="nav-op08"><span class="dot"></span>OP-08</a><a class="nav-btn" href="op09.html" id="nav-op09"><span class="dot"></span>OP-09</a><a class="nav-btn" href="op10.html" id="nav-op10"><span class="dot"></span>OP-10</a><a class="nav-btn active" href="op11.html" id="nav-op11"><span class="dot"></span>OP-11</a><a class="nav-btn" href="op12.html" id="nav-op12"><span class="dot"></span>OP-12</a><a class="nav-btn" href="op13.html" id="nav-op13"><span class="dot"></span>OP-13</a><a class="nav-btn" href="op14.html" id="nav-op14"><span class="dot"></span>OP-14</a><a class="nav-btn" href="op15.html" id="nav-op15"><span class="dot"></span>OP-15</a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <div class="set-label">OP-11 · ONE PIECE CARD GAME</div>
+      <div class="set-title">A Fist of Divine Speed</div>
+      <div class="set-meta">122 การ์ด (numbered) · <span class="rate-pill">100 ¥ = 20.11 ฿</span></div>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--dark2); border-bottom:1px solid var(--border);">
+  <div class="filter-wrap">
+    <span class="filter-label-txt">ขนาด:</span>
+    <button class="view-btn" onclick="setSize('small')">เล็ก</button>
+    <button class="view-btn on" onclick="setSize('normal')">ปกติ</button>
+    <button class="view-btn" onclick="setSize('big')">ใหญ่</button>
+    <div class="filter-divider"></div>
+    <span class="filter-label-txt">ราคาการ์ดหายากจาก yuyu-tei.jp (มี.ค. 2569)</span>
+    <span class="count-badge" id="count-badge"></span>
+  </div>
+</div>
+
+<div class="content" style="padding-top:16px;">
+  <div class="cards-grid" id="cards-grid"></div>
+</div>
+
+<footer class="page-footer">
+  รูปภาพจาก <a href="https://asia-th.onepiece-cardgame.com" target="_blank">onepiece-cardgame.com</a> ·
+  ราคาจาก <a href="https://yuyu-tei.jp/sell/opc/s/op11" target="_blank">yuyu-tei.jp</a>
+</footer>
+
+<script>
+const SET_ID = "OP11";
+const TOTAL = 122;
+const RATE = 0.2011;
+const PRICES = {
+  "OP11-118": {jpy:1780,thb:358,stock:true},
+  "OP11-119": {jpy:980,thb:197,stock:true},
+  "OP11-118_sec": {jpy:780,thb:157,stock:true},
+  "OP11-119_sec": {jpy:320,thb:64,stock:true},
+  "OP11-004": {jpy:1480,thb:298,stock:true},
+  "OP11-010": {jpy:780,thb:157,stock:true},
+  "OP11-031": {jpy:580,thb:117,stock:true},
+  "OP11-051": {jpy:780,thb:157,stock:true},
+  "OP11-054": {jpy:2980,thb:599,stock:true},
+  "OP11-067": {jpy:1280,thb:257,stock:true},
+  "OP11-070": {jpy:780,thb:157,stock:true},
+  "OP11-092": {jpy:1480,thb:298,stock:true},
+  "OP11-095": {jpy:580,thb:117,stock:true},
+  "OP11-101": {jpy:780,thb:157,stock:true}
+};
+
+function imgUrl(num) {
+  const n = String(num).padStart(3,'0');
+  return `https://asia-th.onepiece-cardgame.com/images/cardlist/card/${SET_ID}-${n}.png?240426`;
+}
+
+function yuyuUrl(num) {
+  const n = String(num).padStart(3,'0');
+  return `https://yuyu-tei.jp/sell/opc/s/op11`;
+}
+
+function buildGrid() {
+  const grid = document.getElementById('cards-grid');
+  let html = '';
+  for (let i = 1; i <= TOTAL; i++) {
+    const num = String(i).padStart(3,'0');
+    const cardId = `${SET_ID}-${num}`;
+    const pData = PRICES[cardId];
+    let priceHtml = '';
+    let stockClass = '';
+    let hasPrice = '';
+    if (pData) {
+      hasPrice = ' has-price';
+      if (!pData.stock) stockClass = ' no-stock-item';
+      priceHtml = `<div class="card-price-jpy">¥${pData.jpy.toLocaleString()}</div>
+        <div class="card-price-thb">฿${pData.thb.toLocaleString()}</div>
+        ${!pData.stock ? '<div class="out-of-stock">หมดสต็อก</div>' : ''}`;
+    } else {
+      priceHtml = `<div class="no-price">ดูราคา →</div>`;
+    }
+    html += `<div class="card-item${hasPrice}${stockClass}">
+      <a class="card-link" href="https://yuyu-tei.jp/sell/opc/s/op11" target="_blank" title="${cardId}"></a>
+      <div class="card-img-wrap">
+        <img src="${imgUrl(i)}" alt="${cardId}" loading="lazy"
+          onload="this.classList.add('loaded')" onerror="this.style.opacity=0.15">
+        <div class="card-num-badge">${cardId}</div>
+      </div>
+      <div class="card-info">${priceHtml}</div>
+    </div>`;
+  }
+  grid.innerHTML = html;
+  document.getElementById('count-badge').textContent = TOTAL + ' การ์ด';
+}
+
+function setSize(s) {
+  const grid = document.getElementById('cards-grid');
+  grid.className = 'cards-grid';
+  if (s !== 'normal') grid.classList.add(s);
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('on'));
+  event.target.classList.add('on');
+}
+
+buildGrid();
+</script>
+</body>
+</html>

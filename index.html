@@ -3,544 +3,356 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OP-01 ROMANCE DAWN — ราคาการ์ด</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>ONE PIECE CARD GAME — ราคาการ์ด</title>
+
 <style>
-  :root {
-    --gold: #c9a84c;
-    --gold-light: #f0d080;
-    --dark: #0d0d0d;
-    --dark2: #161616;
-    --dark3: #1e1e1e;
-    --red: #e83333;
-    --text: #e8e0d0;
-    --text-dim: #888;
-    --psec: #ff4444;
-    --sec: #ff8c00;
-    --psr: #c9a84c;
-    --sr: #c0c0c0;
-    --pr: #88ccff;
-    --r: #66aaff;
-    --puc: #cc88ff;
-    --uc: #aa66dd;
-    --pc: #88dd88;
-    --c: #666;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--dark);
-    color: var(--text);
-    font-family: 'Noto Sans Thai', sans-serif;
-    min-height: 100vh;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+Thai:wght@300;400;600;700&display=swap');
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --dark: #0a0a0a;
+  --dark2: #141414;
+  --dark3: #1c1c1c;
+  --dark4: #222;
+  --red: #e83333;
+  --text: #e8e0d0;
+  --text-dim: #777;
+  --border: #2a2a2a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--dark); color: var(--text); font-family: 'Noto Sans Thai', sans-serif; min-height: 100vh; }
 
-  /* Header */
-  .header {
-    background: linear-gradient(135deg, #0d0d0d 0%, #1a0a00 50%, #0d0d0d 100%);
-    border-bottom: 2px solid var(--gold);
-    padding: 32px 24px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .header-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .header h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    letter-spacing: 0.08em;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-  }
-  .header-meta {
-    margin-left: auto;
-    text-align: right;
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-  .rate-badge {
-    display: inline-block;
-    background: rgba(201,168,76,0.15);
-    border: 1px solid var(--gold);
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 0.75rem;
-    color: var(--gold-light);
-    margin-top: 4px;
-  }
+/* ── NAV ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(10,10,10,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  height: 52px;
+  display: flex; align-items: center; gap: 0;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.topbar::-webkit-scrollbar { display: none; }
+.topbar-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  margin-right: 20px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-sep { width: 1px; height: 24px; background: #2a2a2a; margin: 0 6px; flex-shrink: 0; }
+.nav-btn {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-family: 'Noto Sans Thai', sans-serif;
+  color: var(--text-dim);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+  border: 1px solid transparent;
+}
+.nav-btn:hover { background: rgba(201,168,76,0.1); color: var(--gold-light); border-color: rgba(201,168,76,0.3); }
+.nav-btn.active { background: rgba(201,168,76,0.15); color: var(--gold); border-color: var(--gold); }
+.nav-btn .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0;
+}
 
-  /* Filter bar */
-  .filter-bar {
-    background: var(--dark2);
-    border-bottom: 1px solid #2a2a2a;
-    padding: 12px 24px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-    position: sticky;
-    top: 88px;
-    z-index: 99;
-  }
-  .filter-label { font-size: 0.75rem; color: var(--text-dim); margin-right: 4px; }
-  .filter-btn {
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid #333;
-    background: transparent;
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    cursor: pointer;
-    font-family: 'Noto Sans Thai', sans-serif;
-    transition: all 0.2s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    border-color: var(--gold);
-    color: var(--gold-light);
-    background: rgba(201,168,76,0.1);
-  }
+/* ── PAGE HEADER ── */
+.page-header {
+  margin-top: 52px;
+  padding: 28px 24px 20px;
+  background: linear-gradient(180deg, #111 0%, var(--dark) 100%);
+  border-bottom: 1px solid var(--border);
+}
+.page-header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.set-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 0.2em; }
+.set-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: 0.06em;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1; margin-top: 2px;
+}
+.set-meta { font-size: 0.78rem; color: var(--text-dim); margin-top: 6px; }
+.rate-pill { display: inline-block; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.4); border-radius: 20px; padding: 3px 10px; font-size: 0.72rem; color: var(--gold-light); }
 
-  /* Content */
-  .content { max-width: 1400px; margin: 0 auto; padding: 24px; }
+/* ── FILTER ── */
+.filter-wrap { max-width: 1400px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.filter-label-txt { font-size: 0.72rem; color: var(--text-dim); }
+.filter-btn {
+  padding: 3px 10px; border-radius: 12px; border: 1px solid #2a2a2a;
+  background: transparent; color: var(--text-dim); font-size: 0.7rem;
+  cursor: pointer; font-family: 'Noto Sans Thai', sans-serif;
+  transition: all 0.15s;
+}
+.filter-btn:hover { border-color: var(--gold); color: var(--gold-light); background: rgba(201,168,76,0.1); }
+.filter-btn.on { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.12); }
+.filter-divider { width: 1px; height: 16px; background: #2a2a2a; }
 
-  /* Section */
-  .section { margin-bottom: 40px; }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.1em;
-    padding: 8px 16px;
-    margin-bottom: 16px;
-    border-left: 4px solid;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-title.psec { border-color: var(--psec); color: var(--psec); }
-  .section-title.sec  { border-color: var(--sec);  color: var(--sec); }
-  .section-title.psr  { border-color: var(--psr);  color: var(--psr); }
-  .section-title.sr   { border-color: var(--sr);   color: var(--sr); }
-  .section-title.pr   { border-color: var(--pr);   color: var(--pr); }
-  .section-title.r    { border-color: var(--r);    color: var(--r); }
-  .section-title.puc  { border-color: var(--puc);  color: var(--puc); }
-  .section-title.uc   { border-color: var(--uc);   color: var(--uc); }
-  .section-title.pc   { border-color: var(--pc);   color: var(--pc); }
-  .section-title.c    { border-color: var(--c);    color: var(--c); }
+/* ── GRID ── */
+.content { max-width: 1400px; margin: 0 auto; padding: 0 24px 60px; }
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
 
-  /* Card grid */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
-  }
+/* ── CARD ── */
+.card-item {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+  position: relative;
+}
+.card-item:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
+.card-img-wrap { position: relative; aspect-ratio: 5/7; background: #111; overflow: hidden; }
+.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.3s; }
+.card-img-wrap img.loading { opacity: 0; }
+.card-img-wrap img.loaded { opacity: 1; }
+.card-num-badge {
+  position: absolute; bottom: 5px; left: 5px;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+  border-radius: 3px; padding: 1px 5px;
+  font-size: 0.6rem; color: #aaa; font-family: monospace;
+}
+.rarity-pip {
+  position: absolute; top: 5px; right: 5px;
+  width: 7px; height: 7px; border-radius: 50%;
+}
+.card-info { padding: 6px 8px 8px; }
+.card-price-jpy { font-size: 0.88rem; font-weight: 700; color: var(--gold-light); }
+.card-price-thb { font-size: 0.72rem; color: #999; }
+.no-price { font-size: 0.7rem; color: #555; }
+.out-of-stock { font-size: 0.65rem; color: var(--red); margin-top: 2px; }
 
-  .card {
-    background: var(--dark3);
-    border: 1px solid #2a2a2a;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s, border-color 0.2s;
-    cursor: pointer;
-    position: relative;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    border-color: var(--gold);
-  }
-  .card-img {
-    width: 100%;
-    aspect-ratio: 5/7;
-    object-fit: cover;
-    background: #111;
-    display: block;
-  }
-  .card-img-placeholder {
-    width: 100%;
-    aspect-ratio: 5/7;
-    background: linear-gradient(135deg, #1a1a1a, #222);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    color: #444;
-    text-align: center;
-    padding: 8px;
-  }
-  .card-body { padding: 8px 10px 10px; }
-  .card-id { font-size: 0.65rem; color: var(--text-dim); }
-  .card-name {
-    font-size: 0.78rem;
-    font-weight: 600;
-    line-height: 1.3;
-    margin: 2px 0 6px;
-    color: var(--text);
-  }
-  .card-prices {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 4px;
-  }
-  .price-jpy {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--gold-light);
-  }
-  .price-thb {
-    font-size: 0.75rem;
-    color: #aaa;
-  }
-  .price-original {
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    text-decoration: line-through;
-  }
+/* rarity colors */
+.pip-psec { background:#ff3333; box-shadow:0 0 5px #ff3333; }
+.pip-sec  { background:#ff8c00; box-shadow:0 0 5px #ff8c00; }
+.pip-psr  { background:#c9a84c; box-shadow:0 0 4px #c9a84c; }
+.pip-sr   { background:#c0c0c0; box-shadow:0 0 4px #c0c0c0; }
+.pip-pr   { background:#7ab8ff; box-shadow:0 0 4px #7ab8ff; }
+.pip-r    { background:#4d9fff; }
+.pip-puc  { background:#c47aff; box-shadow:0 0 3px #c47aff; }
+.pip-uc   { background:#9955dd; }
+.pip-pc   { background:#66cc66; }
+.pip-c    { background:#555; }
 
-  /* Rarity dot */
-  .rarity-dot {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-  .dot-psec { background: var(--psec); box-shadow: 0 0 6px var(--psec); }
-  .dot-sec  { background: var(--sec);  box-shadow: 0 0 6px var(--sec); }
-  .dot-psr  { background: var(--psr);  box-shadow: 0 0 6px var(--psr); }
-  .dot-sr   { background: var(--sr);   box-shadow: 0 0 6px var(--sr); }
-  .dot-pr   { background: var(--pr);   box-shadow: 0 0 6px var(--pr); }
-  .dot-r    { background: var(--r);    box-shadow: 0 0 6px var(--r); }
-  .dot-puc  { background: var(--puc);  box-shadow: 0 0 6px var(--puc); }
-  .dot-uc   { background: var(--uc);   box-shadow: 0 0 6px var(--uc); }
-  .dot-pc   { background: var(--pc);   box-shadow: 0 0 6px var(--pc); }
-  .dot-c    { background: var(--c); }
+.card-item.has-price:hover { border-color: var(--gold-light); }
+.card-item.no-stock-item { opacity: 0.6; }
 
-  .no-stock { opacity: 0.5; }
-  .no-stock .card-img-placeholder { background: #0f0f0f; }
+/* link overlay */
+.card-link { position: absolute; inset: 0; z-index: 2; }
 
-  /* Source note */
-  .source-note {
-    text-align: center;
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    padding: 24px;
-    border-top: 1px solid #222;
-    margin-top: 40px;
-  }
-  .source-note a { color: var(--gold); text-decoration: none; }
-  .source-note a:hover { text-decoration: underline; }
+/* view toggle */
+.view-toggle { display: flex; gap: 6px; }
+.view-btn { padding: 3px 10px; border-radius: 4px; border: 1px solid #2a2a2a; background: transparent; color: var(--text-dim); font-size: 0.7rem; cursor: pointer; font-family: 'Noto Sans Thai', sans-serif; transition: all 0.15s; }
+.view-btn.on { border-color: #555; color: var(--text); background: #222; }
+
+/* big grid mode */
+.cards-grid.big { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+.cards-grid.small { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 6px; }
+.cards-grid.small .card-info { padding: 4px 6px 6px; }
+.cards-grid.small .card-price-jpy { font-size: 0.78rem; }
+
+/* count badge */
+.count-badge { font-size: 0.75rem; color: var(--text-dim); margin-left: auto; }
+
+/* footer */
+.page-footer { text-align: center; font-size: 0.68rem; color: #444; padding: 20px; border-top: 1px solid #1a1a1a; }
+.page-footer a { color: #666; }
+</style>
+
+<style>
+.hero {
+  margin-top: 52px;
+  padding: 60px 24px 40px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, #1a0f00 0%, var(--dark) 70%);
+  border-bottom: 1px solid var(--border);
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #c9a84c, #f0d080, #c9a84c);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1;
+}
+.hero-sub { font-size: 0.9rem; color: var(--text-dim); margin-top: 10px; }
+.hero-rate { display: inline-block; margin-top: 12px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35); border-radius: 20px; padding: 4px 14px; font-size: 0.78rem; color: var(--gold-light); }
+
+.sets-grid {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 24px 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.set-card {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 16px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.18s, border-color 0.18s, background 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+.set-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.18s;
+}
+.set-card:hover { transform: translateY(-3px); border-color: var(--gold); background: #222; }
+.set-card:hover::before { opacity: 1; }
+.set-card-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 0.08em; }
+.set-card-name { font-size: 0.82rem; font-weight: 600; color: var(--text); line-height: 1.3; margin-top: 2px; }
+.set-card-meta { font-size: 0.7rem; color: var(--text-dim); margin-top: 4px; }
+.set-card-arrow { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--text-dim); transition: color 0.18s, right 0.18s; }
+.set-card:hover .set-card-arrow { color: var(--gold); right: 12px; }
+
+.section-title {
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin: 30px 0 0;
+  padding: 0 24px;
+}
 </style>
 </head>
 <body>
 
-<header class="header">
-  <div class="header-inner">
-    <div>
-      <h1>OP-01 · ROMANCE DAWN</h1>
-      <div style="font-size:0.85rem; color:var(--text-dim); margin-top:4px;">ราคาการ์ดทั้งหมด — ยูยูเทย์ (yuyu-tei.jp)</div>
-    </div>
-    <div class="header-meta">
-      <div>อัตราแลกเปลี่ยน</div>
-      <div class="rate-badge">100 ¥ = 20.11 ฿ (มี.ค. 2569)</div>
-    </div>
-  </div>
-</header>
+<nav class="topbar">
+  <a class="topbar-brand" href="index.html">⚓ OPCG</a>
+  <div class="nav-sep"></div>
+  <a class="nav-btn" href="op01.html" id="nav-op01"><span class="dot"></span>OP-01</a><a class="nav-btn" href="op02.html" id="nav-op02"><span class="dot"></span>OP-02</a><a class="nav-btn" href="op03.html" id="nav-op03"><span class="dot"></span>OP-03</a><a class="nav-btn" href="op04.html" id="nav-op04"><span class="dot"></span>OP-04</a><a class="nav-btn" href="op05.html" id="nav-op05"><span class="dot"></span>OP-05</a><a class="nav-btn" href="op06.html" id="nav-op06"><span class="dot"></span>OP-06</a><a class="nav-btn" href="op07.html" id="nav-op07"><span class="dot"></span>OP-07</a><a class="nav-btn" href="op08.html" id="nav-op08"><span class="dot"></span>OP-08</a><a class="nav-btn" href="op09.html" id="nav-op09"><span class="dot"></span>OP-09</a><a class="nav-btn" href="op10.html" id="nav-op10"><span class="dot"></span>OP-10</a><a class="nav-btn" href="op11.html" id="nav-op11"><span class="dot"></span>OP-11</a><a class="nav-btn" href="op12.html" id="nav-op12"><span class="dot"></span>OP-12</a><a class="nav-btn" href="op13.html" id="nav-op13"><span class="dot"></span>OP-13</a><a class="nav-btn" href="op14.html" id="nav-op14"><span class="dot"></span>OP-14</a><a class="nav-btn" href="op15.html" id="nav-op15"><span class="dot"></span>OP-15</a>
+</nav>
 
-<div class="filter-bar">
-  <span class="filter-label">Rarity:</span>
-  <button class="filter-btn active" onclick="filterCards('all')">ทั้งหมด</button>
-  <button class="filter-btn" onclick="filterCards('P-SEC')" style="color:#ff4444;border-color:#ff4444;">P-SEC</button>
-  <button class="filter-btn" onclick="filterCards('SEC')" style="color:#ff8c00;border-color:#ff8c00;">SEC</button>
-  <button class="filter-btn" onclick="filterCards('P-SR')" style="color:#c9a84c;border-color:#c9a84c;">P-SR</button>
-  <button class="filter-btn" onclick="filterCards('SR')" style="color:#c0c0c0;border-color:#c0c0c0;">SR</button>
-  <button class="filter-btn" onclick="filterCards('P-R')" style="color:#88ccff;border-color:#88ccff;">P-R</button>
-  <button class="filter-btn" onclick="filterCards('R')" style="color:#66aaff;border-color:#66aaff;">R</button>
-  <button class="filter-btn" onclick="filterCards('P-UC')" style="color:#cc88ff;border-color:#cc88ff;">P-UC</button>
-  <button class="filter-btn" onclick="filterCards('UC')" style="color:#aa66dd;border-color:#aa66dd;">UC</button>
-  <button class="filter-btn" onclick="filterCards('P-C')" style="color:#88dd88;border-color:#88dd88;">P-C</button>
-  <button class="filter-btn" onclick="filterCards('C')" style="color:#666;border-color:#666;">C</button>
+<div class="hero">
+  <div class="hero-title">ONE PIECE CARD GAME</div>
+  <div class="hero-sub">ราคาการ์ดทุกชุด OP-01 ถึง OP-15</div>
+  <div class="hero-rate">100 ¥ = 20.11 ฿ (มี.ค. 2569) · ราคาจาก yuyu-tei.jp</div>
 </div>
 
-<div class="content">
+<div class="section-title">เลือกชุดการ์ด</div>
 
-<script>
-const RATE = 0.2011; // 1 JPY = 0.2011 THB
-
-function jpy2thb(jpy) {
-  return Math.round(jpy * RATE);
-}
-
-function makeCard(data) {
-  const { id, name, rarity, jpy, jpyOld, inStock, imgId } = data;
-  const rarityKey = rarity.toLowerCase().replace('-','').replace('-','');
-  const thb = jpy2thb(jpy);
-  const thbOld = jpyOld ? jpy2thb(jpyOld) : null;
-  const stockClass = inStock ? '' : 'no-stock';
-  const imgUrl = `https://asia-th.onepiece-cardgame.com/images/cardlist/card/${id}.png?240426`;
-
-  const dotMap = {
-    'P-SEC':'dot-psec','SEC':'dot-sec','P-SR':'dot-psr','SR':'dot-sr',
-    'P-R':'dot-pr','R':'dot-r','P-UC':'dot-puc','UC':'dot-uc','P-C':'dot-pc','C':'dot-c'
-  };
-
-  let priceHtml = `<div class="price-row">
-    <span class="price-jpy">¥${jpy.toLocaleString()}</span>
-    <span class="price-thb">฿${thb.toLocaleString()}</span>
-  </div>`;
-  if (jpyOld) {
-    priceHtml += `<div class="price-original">ราคาเดิม ¥${jpyOld} / ฿${thbOld}</div>`;
-  }
-  if (!inStock) {
-    priceHtml += `<div style="font-size:0.65rem;color:#e83333;margin-top:2px;">หมดสต็อก</div>`;
-  }
-
-  return `<div class="card ${stockClass}" data-rarity="${rarity}" onclick="window.open('https://yuyu-tei.jp/sell/opc/card/op01/${imgId}','_blank')">
-    <div class="rarity-dot ${dotMap[rarity]||'dot-c'}"></div>
-    <img class="card-img" src="${imgUrl}" alt="${name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="card-img-placeholder" style="display:none">${id}<br>${name}</div>
-    <div class="card-body">
-      <div class="card-id">${id} · ${rarity}</div>
-      <div class="card-name">${name}</div>
-      <div class="card-prices">${priceHtml}</div>
-    </div>
-  </div>`;
-}
-
-const sections = [
-  {
-    rarity: 'P-SEC', cls: 'psec', title: 'P-SEC — Parallel Secret',
-    cards: [
-      { id:'OP01-120', name:'แชงคส์ (Parallel)', rarity:'P-SEC', jpy:3980, jpyOld:null, inStock:false, imgId:'10151' },
-      { id:'OP01-120', name:'แชงคส์ (Parallel / Super Parallel / ไม่มีตราประทับ)', rarity:'P-SEC', jpy:128000, jpyOld:null, inStock:false, imgId:'10152' },
-      { id:'OP01-121', name:'ยามาโตะ (Parallel)', rarity:'P-SEC', jpy:3980, jpyOld:null, inStock:true, imgId:'10154' },
-    ]
-  },
-  {
-    rarity: 'SEC', cls: 'sec', title: 'SEC — Secret Rare',
-    cards: [
-      { id:'OP01-120', name:'แชงคส์ (ไม่มีตราประทับ)', rarity:'SEC', jpy:220, jpyOld:null, inStock:false, imgId:'10150' },
-      { id:'OP01-121', name:'ยามาโตะ (ไม่มีตราประทับ)', rarity:'SEC', jpy:220, jpyOld:null, inStock:false, imgId:'10153' },
-    ]
-  },
-  {
-    rarity: 'P-SR', cls: 'psr', title: 'P-SR — Parallel Super Rare',
-    cards: [
-      { id:'OP01-024', name:'มังกี้ ดี ลูฟี่ (Parallel)', rarity:'P-SR', jpy:2980, jpyOld:null, inStock:false, imgId:'10031' },
-      { id:'OP01-025', name:'โรโรโนอา โซโล (Parallel)', rarity:'P-SR', jpy:3980, jpyOld:null, inStock:true, imgId:'10033' },
-      { id:'OP01-040', name:'คินเอมอน (Parallel)', rarity:'P-SR', jpy:580, jpyOld:null, inStock:true, imgId:'10051' },
-      { id:'OP01-047', name:'ทราฟัลการ์ ลอ (Parallel)', rarity:'P-SR', jpy:1480, jpyOld:null, inStock:true, imgId:'10059' },
-      { id:'OP01-051', name:'ยูสตัส คิด (Parallel)', rarity:'P-SR', jpy:1280, jpyOld:null, inStock:true, imgId:'10065' },
-      { id:'OP01-067', name:'โครโคไดล์ (Parallel)', rarity:'P-SR', jpy:780, jpyOld:null, inStock:false, imgId:'10086' },
-      { id:'OP01-070', name:'ดราคิว มิฮอว์ค (Parallel)', rarity:'P-SR', jpy:980, jpyOld:null, inStock:false, imgId:'10090' },
-      { id:'OP01-078', name:'โบอา แฮนค็อก (Parallel)', rarity:'P-SR', jpy:4980, jpyOld:null, inStock:true, imgId:'10101' },
-      { id:'OP01-094', name:'ไคโด (Parallel)', rarity:'P-SR', jpy:780, jpyOld:null, inStock:false, imgId:'10120' },
-      { id:'OP01-096', name:'คิง (Parallel)', rarity:'P-SR', jpy:780, jpyOld:null, inStock:true, imgId:'10123' },
-    ]
-  },
-  {
-    rarity: 'SR', cls: 'sr', title: 'SR — Super Rare',
-    cards: [
-      { id:'OP01-024', name:'มังกี้ ดี ลูฟี่', rarity:'SR', jpy:120, jpyOld:null, inStock:true, imgId:'10030' },
-      { id:'OP01-025', name:'โรโรโนอา โซโล', rarity:'SR', jpy:220, jpyOld:null, inStock:true, imgId:'10032' },
-      { id:'OP01-040', name:'คินเอมอน', rarity:'SR', jpy:80, jpyOld:120, inStock:true, imgId:'10050' },
-      { id:'OP01-047', name:'ทราฟัลการ์ ลอ', rarity:'SR', jpy:120, jpyOld:null, inStock:true, imgId:'10058' },
-      { id:'OP01-051', name:'ยูสตัส คิด', rarity:'SR', jpy:120, jpyOld:null, inStock:true, imgId:'10064' },
-      { id:'OP01-067', name:'โครโคไดล์', rarity:'SR', jpy:80, jpyOld:120, inStock:true, imgId:'10085' },
-      { id:'OP01-070', name:'ดราคิว มิฮอว์ค', rarity:'SR', jpy:80, jpyOld:120, inStock:true, imgId:'10089' },
-      { id:'OP01-078', name:'โบอา แฮนค็อก', rarity:'SR', jpy:120, jpyOld:null, inStock:true, imgId:'10100' },
-      { id:'OP01-094', name:'ไคโด', rarity:'SR', jpy:120, jpyOld:null, inStock:true, imgId:'10119' },
-      { id:'OP01-096', name:'คิง', rarity:'SR', jpy:120, jpyOld:null, inStock:true, imgId:'10122' },
-    ]
-  },
-  {
-    rarity: 'P-R', cls: 'pr', title: 'P-R — Parallel Rare',
-    cards: [
-      { id:'OP01-013', name:'ซันจิ (Parallel)', rarity:'P-R', jpy:1980, jpyOld:null, inStock:true, imgId:'10018' },
-      { id:'OP01-016', name:'นามิ (Parallel)', rarity:'P-R', jpy:14800, jpyOld:null, inStock:true, imgId:'10022' },
-      { id:'OP01-073', name:'ดองกีโฮเต้ โดฟลามิงโก (Parallel)', rarity:'P-R', jpy:1480, jpyOld:null, inStock:true, imgId:'10094' },
-      { id:'OP01-093', name:'อุรุติ (Parallel)', rarity:'P-R', jpy:580, jpyOld:null, inStock:true, imgId:'10118' },
-      { id:'OP01-097', name:'ควีน (Parallel)', rarity:'P-R', jpy:580, jpyOld:null, inStock:true, imgId:'10125' },
-      { id:'OP01-102', name:'แจ็ค (Parallel)', rarity:'P-R', jpy:580, jpyOld:null, inStock:true, imgId:'10131' },
-    ]
-  },
-  {
-    rarity: 'R', cls: 'r', title: 'R — Rare',
-    cards: [
-      { id:'OP01-004', name:'อุซ็อปปุ', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10007' },
-      { id:'OP01-005', name:'อุตะ', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10008' },
-      { id:'OP01-013', name:'ซันจิ', rarity:'R', jpy:120, jpyOld:220, inStock:true, imgId:'10017' },
-      { id:'OP01-016', name:'นามิ', rarity:'R', jpy:220, jpyOld:null, inStock:true, imgId:'10021' },
-      { id:'OP01-017', name:'นิโค โรบิน', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10023' },
-      { id:'OP01-026', name:'กัมกัมโน ฮิเก็นจู', rarity:'R', jpy:120, jpyOld:null, inStock:true, imgId:'10034' },
-      { id:'OP01-035', name:'โอคิคุ', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10045' },
-      { id:'OP01-041', name:'โคสึกิ โมโมโนสุเกะ', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10052' },
-      { id:'OP01-046', name:'เด็นจิโร', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10057' },
-      { id:'OP01-049', name:'เบโปะ', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10062' },
-      { id:'OP01-054', name:'เอ็กซ์ เดรค', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10068' },
-      { id:'OP01-058', name:'จิกิเซน', rarity:'R', jpy:120, jpyOld:null, inStock:true, imgId:'10072' },
-      { id:'OP01-068', name:'เก็กโค มาเรีย', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10087' },
-      { id:'OP01-069', name:'ซีซาร์ คลาวน์', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10088' },
-      { id:'OP01-071', name:'จิมเบ', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10091' },
-      { id:'OP01-073', name:'ดองกีโฮเต้ โดฟลามิงโก', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10093' },
-      { id:'OP01-074', name:'บาโธโลมิว คุมะ', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10095' },
-      { id:'OP01-079', name:'มิส ออลซันเดย์', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10102' },
-      { id:'OP01-086', name:'เชาคาเบ็นชิ', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10109' },
-      { id:'OP01-093', name:'อุรุติ', rarity:'R', jpy:120, jpyOld:null, inStock:true, imgId:'10117' },
-      { id:'OP01-097', name:'ควีน', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10124' },
-      { id:'OP01-102', name:'แจ็ค', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10130' },
-      { id:'OP01-111', name:'แบล็คมาเรีย', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10141' },
-      { id:'OP01-112', name:'เพจวัน', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10142' },
-      { id:'OP01-114', name:'เอ็กซ์ เดรค', rarity:'R', jpy:80, jpyOld:120, inStock:true, imgId:'10144' },
-      { id:'OP01-119', name:'ไรเมฮาจิ', rarity:'R', jpy:180, jpyOld:220, inStock:true, imgId:'10149' },
-    ]
-  },
-  {
-    rarity: 'P-UC', cls: 'puc', title: 'P-UC — Parallel Uncommon',
-    cards: [
-      { id:'OP01-077', name:'เปโรนา (Parallel)', rarity:'P-UC', jpy:500, jpyOld:null, inStock:true, imgId:'10099' },
-      { id:'OP01-109', name:'ฟูส-ฟู (Parallel)', rarity:'P-UC', jpy:220, jpyOld:null, inStock:true, imgId:'10139' },
-    ]
-  },
-  {
-    rarity: 'UC', cls: 'uc', title: 'UC — Uncommon',
-    cards: [
-      { id:'OP01-006', name:'โอตามะ', rarity:'UC', jpy:120, jpyOld:null, inStock:true, imgId:'10009' },
-      { id:'OP01-011', name:'กอร์ดอน', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10015' },
-      { id:'OP01-014', name:'จิมเบ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10019' },
-      { id:'OP01-015', name:'โทนี่โทนี่ ช็อปเปอร์', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10020' },
-      { id:'OP01-021', name:'แฟรงกี้', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10027' },
-      { id:'OP01-022', name:'บรู๊ค', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10028' },
-      { id:'OP01-029', name:'แรดิคัลบีม!!!!', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10037' },
-      { id:'OP01-030', name:'2 ปีต่อมา! ที่เกาะชาบอนดี้!!!', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10038' },
-      { id:'OP01-032', name:'อาชุระ โดจิ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10041' },
-      { id:'OP01-033', name:'อิโซ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10042' },
-      { id:'OP01-039', name:'คิลเลอร์', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10049' },
-      { id:'OP01-042', name:'โคมุราซากิ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10053' },
-      { id:'OP01-052', name:'ไรโซ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10066' },
-      { id:'OP01-056', name:'โกมาโนะ โซ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10070' },
-      { id:'OP01-057', name:'โตะเก็นฮาคุตากิ', rarity:'UC', jpy:180, jpyOld:220, inStock:true, imgId:'10071' },
-      { id:'OP01-063', name:'อาร์ลอง', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10080' },
-      { id:'OP01-077', name:'เปโรนา', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10098' },
-      { id:'OP01-083', name:'มิสเตอร์ 1 (ดาซ์ โบเนส)', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10106' },
-      { id:'OP01-084', name:'มิสเตอร์ 2 บอนเครย์ (เบนทาม)', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10107' },
-      { id:'OP01-085', name:'มิสเตอร์ 3 (แกลดิอุส)', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10108' },
-      { id:'OP01-088', name:'ดาบแห่งทะเลทราย', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10111' },
-      { id:'OP01-090', name:'บาโรค เวิร์คส์', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10113' },
-      { id:'OP01-095', name:'เคียวชิโร', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10121' },
-      { id:'OP01-098', name:'คุโรซุมิ โอโรจิ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10126' },
-      { id:'OP01-101', name:'ซาซากิ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10129' },
-      { id:'OP01-106', name:'บาซิล ฮอว์กินส์', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10135' },
-      { id:'OP01-108', name:'นักฆ่าเคียวโซ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10137' },
-      { id:'OP01-109', name:'ฟูส-ฟู', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10138' },
-      { id:'OP01-116', name:'ผลปีศาจ SMILE เทียม', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10146' },
-      { id:'OP01-118', name:'อุรุตาโจ', rarity:'UC', jpy:80, jpyOld:null, inStock:true, imgId:'10148' },
-    ]
-  },
-  {
-    rarity: 'P-C', cls: 'pc', title: 'P-C — Parallel Common',
-    cards: [
-      { id:'OP01-008', name:'คาเวนดิช (Parallel)', rarity:'P-C', jpy:220, jpyOld:null, inStock:true, imgId:'10012' },
-      { id:'OP01-034', name:'อินุอาราชิ (Parallel)', rarity:'P-C', jpy:220, jpyOld:null, inStock:true, imgId:'10044' },
-      { id:'OP01-048', name:'เนโกะมามุชิ (Parallel)', rarity:'P-C', jpy:220, jpyOld:null, inStock:true, imgId:'10061' },
-      { id:'OP01-064', name:'อัลวิดา (Parallel)', rarity:'P-C', jpy:220, jpyOld:null, inStock:false, imgId:'10082' },
-    ]
-  },
-  {
-    rarity: 'C', cls: 'c', title: 'C — Common',
-    cards: [
-      { id:'OP01-007', name:'คาริบู', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10010' },
-      { id:'OP01-008', name:'คาเวนดิช', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10011' },
-      { id:'OP01-009', name:'แครอท', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10013' },
-      { id:'OP01-010', name:'โคมะจิโย', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10014' },
-      { id:'OP01-012', name:'ไซ', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10016' },
-      { id:'OP01-018', name:'ไฮรูดิน', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10024' },
-      { id:'OP01-019', name:'บาร์โธโลมิว', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10025' },
-      { id:'OP01-020', name:'เฮียวโกโร', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10026' },
-      { id:'OP01-023', name:'มาร์โค', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10029' },
-      { id:'OP01-027', name:'โต๊ะกลม', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10035' },
-      { id:'OP01-028', name:'มาคุฮิสสึ กรีนสตาร์ แรฟเฟิลเซีย', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10036' },
-      { id:'OP01-034', name:'อินุอาราชิ', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10043' },
-      { id:'OP01-036', name:'โอสึรุ', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10046' },
-      { id:'OP01-037', name:'คาวะมัตสึ', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10047' },
-      { id:'OP01-038', name:'คันจุโร', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10048' },
-      { id:'OP01-043', name:'ชิโนบุ', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10054' },
-      { id:'OP01-044', name:'ชาจิ', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10055' },
-      { id:'OP01-045', name:'จัมบาร์', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10056' },
-      { id:'OP01-048', name:'เนโกะมามุชิ', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10060' },
-      { id:'OP01-050', name:'เพนกวิน', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10063' },
-      { id:'OP01-053', name:'ไวเออร์', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10067' },
-      { id:'OP01-055', name:'"มาเป็นซามูไรของข้า"', rarity:'C', jpy:80, jpyOld:120, inStock:true, imgId:'10069' },
-      { id:'OP01-059', name:'เบเบ็น!!', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10073' },
-      { id:'OP01-064', name:'อัลวิดา', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10081' },
-      { id:'OP01-065', name:'วิเอร์โก', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10083' },
-      { id:'OP01-066', name:'คริก', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10084' },
-      { id:'OP01-072', name:'สไมลี่', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10092' },
-      { id:'OP01-075', name:'ปาซิฟิสต้า', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10096' },
-      { id:'OP01-076', name:'เบลามี', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10097' },
-      { id:'OP01-080', name:'มิส ดับเบิลฟิงเกอร์ (ซาลา)', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10103' },
-      { id:'OP01-081', name:'โมชา', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10104' },
-      { id:'OP01-082', name:'โมเนะ', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10105' },
-      { id:'OP01-087', name:'เจ้าหน้าที่เอเจนท์', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10110' },
-      { id:'OP01-089', name:'เนินทรายรูปพระจันทร์เสี้ยว', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10112' },
-      { id:'OP01-092', name:'อุราชิมะ', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10116' },
-      { id:'OP01-099', name:'คุโรซุมิ เซมิมารุ', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10127' },
-      { id:'OP01-100', name:'คุโรซุมิ ฮิกุราชิ', rarity:'C', jpy:80, jpyOld:null, inStock:true, imgId:'10128' },
-      { id:'OP01-103', name:'สแครตเชน อะปู', rarity:'C', jpy:30, jpyOld:null, inStock:true, imgId:'10132' },
-    ]
-  }
-];
-
-document.addEventListener('DOMContentLoaded', () => {
-  const content = document.querySelector('.content');
-  sections.forEach(sec => {
-    const div = document.createElement('div');
-    div.className = 'section';
-    div.dataset.rarity = sec.rarity;
-    div.innerHTML = `
-      <div class="section-title ${sec.cls}">${sec.title}
-        <span style="font-family:'Noto Sans Thai';font-size:0.9rem;font-weight:300;color:#aaa;">(${sec.cards.length} การ์ด)</span>
-      </div>
-      <div class="cards">${sec.cards.map(c => makeCard(c)).join('')}</div>
-    `;
-    content.appendChild(div);
-  });
-
-  // source note
-  const note = document.createElement('div');
-  note.className = 'source-note';
-  note.innerHTML = `ราคาจาก <a href="https://yuyu-tei.jp/sell/opc/s/op01" target="_blank">yuyu-tei.jp</a> · รูปภาพจาก <a href="https://yuyu-tei.jp" target="_blank">card.yuyu-tei.jp</a> · อัตราแลกเปลี่ยน 100 ¥ = 20.11 ฿ (มี.ค. 2569)`;
-  content.appendChild(note);
-});
-
-function filterCards(rarity) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  document.querySelectorAll('.section').forEach(s => {
-    if (rarity === 'all' || s.dataset.rarity === rarity) {
-      s.style.display = '';
-    } else {
-      s.style.display = 'none';
-    }
-  });
-}
-</script>
-
+<div class="sets-grid">
+  
+    <a class="set-card" href="op01.html">
+      <div class="set-card-label">OP-01</div>
+      <div class="set-card-name">ROMANCE DAWN</div>
+      <div class="set-card-meta">121 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op02.html">
+      <div class="set-card-label">OP-02</div>
+      <div class="set-card-name">Paramount War</div>
+      <div class="set-card-meta">121 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op03.html">
+      <div class="set-card-label">OP-03</div>
+      <div class="set-card-name">Pillars of Strength</div>
+      <div class="set-card-meta">121 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op04.html">
+      <div class="set-card-label">OP-04</div>
+      <div class="set-card-name">Kingdoms of Intrigue</div>
+      <div class="set-card-meta">121 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op05.html">
+      <div class="set-card-label">OP-05</div>
+      <div class="set-card-name">Awakening of the New Era</div>
+      <div class="set-card-meta">122 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op06.html">
+      <div class="set-card-label">OP-06</div>
+      <div class="set-card-name">Wings of the Captain</div>
+      <div class="set-card-meta">120 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op07.html">
+      <div class="set-card-label">OP-07</div>
+      <div class="set-card-name">500 Years in the Future</div>
+      <div class="set-card-meta">121 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op08.html">
+      <div class="set-card-label">OP-08</div>
+      <div class="set-card-name">Two Legends</div>
+      <div class="set-card-meta">121 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op09.html">
+      <div class="set-card-label">OP-09</div>
+      <div class="set-card-name">Emperors in the New World</div>
+      <div class="set-card-meta">124 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op10.html">
+      <div class="set-card-label">OP-10</div>
+      <div class="set-card-name">Royal Blood</div>
+      <div class="set-card-meta">121 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op11.html">
+      <div class="set-card-label">OP-11</div>
+      <div class="set-card-name">A Fist of Divine Speed</div>
+      <div class="set-card-meta">122 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op12.html">
+      <div class="set-card-label">OP-12</div>
+      <div class="set-card-name">Legacy of the Master</div>
+      <div class="set-card-meta">122 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op13.html">
+      <div class="set-card-label">OP-13</div>
+      <div class="set-card-name">Carrying on His Will</div>
+      <div class="set-card-meta">122 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op14.html">
+      <div class="set-card-label">OP-14</div>
+      <div class="set-card-name">The Azure Sea's Seven</div>
+      <div class="set-card-meta">125 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
+    <a class="set-card" href="op15.html">
+      <div class="set-card-label">OP-15</div>
+      <div class="set-card-name">Adventure on KAMI's Island</div>
+      <div class="set-card-meta">122 การ์ด</div>
+      <div class="set-card-arrow">→</div>
+    </a>
 </div>
+
+<footer class="page-footer">
+  ราคาจาก <a href="https://yuyu-tei.jp/top/opc" target="_blank">yuyu-tei.jp</a> ·
+  รูปภาพจาก <a href="https://asia-th.onepiece-cardgame.com" target="_blank">onepiece-cardgame.com</a>
+</footer>
+
 </body>
 </html>
