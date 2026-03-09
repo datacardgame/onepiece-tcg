@@ -215,10 +215,6 @@
     <span class="filter-label">RARITY</span>
     <div class="rarity-chips" id="rarityChips"></div>
     <div class="vdiv"></div>
-    <label class="stock-toggle" onclick="toggleStock()">
-      <div class="toggle-sw" id="stockSw"></div>
-      <span class="toggle-lbl">IN STOCK ONLY</span>
-    </label>
     <div class="vdiv"></div>
     <span class="filter-label">SHOW</span>
     <select class="top-sel" id="topSel" onchange="render()">
@@ -434,7 +430,7 @@ function makeCard(card){
   const color=RC[card.rarity]||'#fff';
   const thb=card.thb||Math.round((card.jpy||0)*RATE);
   const el=document.createElement('div');
-  el.className='price-card'+(card.stock?'':' out-of-stock');
+  el.className='price-card'+(card.stock?'':'');
   el.setAttribute('data-key',card.key);
   el.style.setProperty('--stripe',color);
 

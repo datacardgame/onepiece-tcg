@@ -10,6 +10,9 @@ OUTPUT_FILE = "prices_full.json"
 
 all_prices = {}
 
+# 🟢 สร้าง Dictionary ส่วนกลางเพื่อจำว่า การ์ดแต่ละรหัสเจอภาพพิเศษไปกี่ใบแล้ว
+variant_counts = {}
+
 def scrape_yuyutei(set_id):
     url = f"https://yuyu-tei.jp/sell/opc/s/{set_id}"
     headers = {
@@ -34,53 +37,60 @@ def scrape_yuyutei(set_id):
     card_count = 0
     
     # วนลูปหา "โซนความหายาก" (Class: .cards-list)
-    # เพราะเว็บนี้จัดกลุ่มการ์ดตามความหายากไว้ในหัวข้อ
     rarity_sections = soup.select('.cards-list')
     
     for section in rarity_sections:
-        # ดึงความหายากจากหัวข้อ (เช่น P-SEC, SR, R)
+        # ดึงความหายากจากหัวข้อ
         rarity_badge = section.select_one('h3 span')
         if not rarity_badge:
             continue
             
         rarity = rarity_badge.text.strip()
         
-        # ค้นหาการ์ดทุกใบที่อยู่ในโซนความหายากนี้ (Class: .card-product)
+        # ค้นหาการ์ดทุกใบที่อยู่ในโซนความหายากนี้
         cards = section.select('.card-product')
         
         for card in cards:
             try:
-                # 1. รหัสการ์ด (อยู่ใน <span> ที่มีขอบสีดำ)
+                # 1. รหัสการ์ด
                 id_elem = card.select_one('span.border-dark')
                 card_id = id_elem.text.strip() if id_elem else "UNKNOWN"
                 if card_id == "UNKNOWN" or card_id == "-":
                     continue
                     
-                # 2. ชื่อการ์ด (อยู่ในแท็ก <h4>)
+                # 2. ชื่อการ์ด
                 name_elem = card.select_one('h4')
                 name = name_elem.text.strip() if name_elem else "Unknown"
                 
-                # 3. ราคา (อยู่ในแท็ก <strong>)
+                # 3. ราคา
                 price_elem = card.select_one('strong')
                 if price_elem:
-                    # ตัดคำว่า " 円" และเครื่องหมายลูกน้ำออก
                     price_str = price_elem.text.replace('円', '').replace(',', '').strip()
                     jpy_price = int(price_str) if price_str.isdigit() else 0
                 else:
                     jpy_price = 0
                     
-                # 4. สต็อก (ถ้ากล่องการ์ดมีคลาส sold-out แปลว่าของหมด)
+                # 4. สต็อก
                 is_sold_out = 'sold-out' in card.get('class', [])
                 
-                # 5. สร้าง Key แยกการ์ด Parallel และ Super Parallel
+                # =======================================================
+                # 5. 🟢 เปลี่ยนมาใช้ระบบบวกเลข Suffix อัตโนมัติ (_p1, _p2, _p3...)
+                # =======================================================
                 key = card_id
                 
-                # ถ้ามีคำว่า スーパーパラレル (Super Parallel) หรือ コミック (Comic)
-                if "スーパーパラレル" in name or "コミック" in name or rarity == "SP":
-                    key = f"{card_id}_p2"
-                # ถ้ามีแค่คำว่า パラレル (Parallel) หรือความหายากขึ้นต้นด้วย P- (เช่น P-SR)
-                elif "パラレル" in name or rarity.startswith("P-"):
-                    key = f"{card_id}_p1"
+                # ตรวจสอบว่าเป็นการ์ดลายพิเศษไหม (มีคำว่า Parallel, Comic หรือเป็นระดับ SP, ขึ้นต้นด้วย P-)
+                is_variant = "パラレル" in name or "コミック" in name or rarity.startswith("P-") or rarity == "SP"
+                
+                if is_variant:
+                    # ถ้าเพิ่งเคยเจอการ์ดรหัสนี้ที่เป็นภาพพิเศษครั้งแรก ให้นับเป็น 1
+                    if card_id not in variant_counts:
+                        variant_counts[card_id] = 1
+                    # ถ้าเคยเจอมาแล้วจากกล่องก่อนหน้า ให้บวกเพิ่มอีก 1
+                    else:
+                        variant_counts[card_id] += 1
+                        
+                    # ประกอบร่าง Key ใหม่ (เช่น OP01-120_p2, OP01-120_p3)
+                    key = f"{card_id}_p{variant_counts[card_id]}"
                     
                 # บันทึกข้อมูลลง Dictionary
                 set_data[key] = {
@@ -102,10 +112,10 @@ def scrape_yuyutei(set_id):
 print("--- เริ่มดึงข้อมูลจาก Yuyu-tei ---")
 for s in SETS:
     all_prices[s] = scrape_yuyutei(s)
-    time.sleep(2) # หน่วงเวลา 2 วินาทีระหว่างเปลี่ยนหน้า เพื่อไม่ให้รบกวนเซิร์ฟเวอร์เขาหนักเกินไป
+    time.sleep(2) # หน่วงเวลา 2 วินาทีระหว่างเปลี่ยนหน้า
 
 # บันทึกเป็นไฟล์ JSON
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump(all_prices, f, ensure_ascii=False, indent=2)
 
-print(f"\n🎉 สำเร็จ! ดึงข้อมูลครบทุกกล่อง และบันทึกไฟล์เป็น '{OUTPUT_FILE}' เรียบร้อยครับ")
+print(f"\n🎉 สำเร็จ! ดึงข้อมูลครบทุกกล่อง (รองรับการรันเลข _p2, _p3 อัตโนมัติ) และบันทึกเป็น '{OUTPUT_FILE}' เรียบร้อยครับ")
