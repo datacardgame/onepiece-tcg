@@ -91,6 +91,10 @@ def scrape_yuyutei(set_id):
                         
                     # ประกอบร่าง Key ใหม่ (เช่น OP01-120_p2, OP01-120_p3)
                     key = f"{card_id}_p{variant_counts[card_id]}"
+
+                # 6. ดึง URL รูปภาพจาก Yuyu-tei 🟢
+                img_elem = card.select_one('.product-img img')
+                img_url = img_elem['src'] if img_elem and 'src' in img_elem.attrs else ""
                     
                 # บันทึกข้อมูลลง Dictionary
                 set_data[key] = {
@@ -98,7 +102,8 @@ def scrape_yuyutei(set_id):
                     "rarity": rarity,
                     "jpy": jpy_price,
                     "thb": round(jpy_price * RATE),
-                    "stock": not is_sold_out
+                    "stock": not is_sold_out,
+                    "image_url": img_url
                 }
                 card_count += 1
                 

@@ -436,9 +436,8 @@ function makeCard(card){
 
   el.innerHTML=`
     <div class="card-img-wrap">
-      <img src="${imgUrl(card.key)}" alt="${card.name}" loading="lazy"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="card-no-img" style="display:none">${card.key.split('_')[0]}</div>
+      <img src="${card.image_url}" alt="${card.name}" loading="lazy"
+      onerror="this.style.opacity=0.2">
     </div>
     <div class="oos-badge">OOS</div>
     <div class="stock-dot ${card.stock?'in':'out'}"></div>
