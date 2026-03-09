@@ -133,14 +133,6 @@
       color: #e63946;
     }
 
-    @media (max-width: 640px) {
-      .warning {
-        font-family: 'Sarabun', sans-serif;
-        font-size: 7px;
-        color: #e63946;
-      }
-    }
-
     .rate-badge {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
@@ -740,6 +732,44 @@
         text-overflow: ellipsis;
       }
     }
+
+    /* 🟢 1. ตั้งค่าเริ่มต้น: ซ่อนตัวตัดบรรทัดบนจอ PC */
+    .flex-break {
+      display: none;
+    }
+
+    /* 🟢 2. ตั้งค่าสำหรับหน้าจอมือถือ */
+    @media (max-width: 640px) {
+
+      /* ปลดล็อกความสูง ให้แถบเมนูยืดตามจำนวนบรรทัดได้ */
+      .header-inner {
+        flex-wrap: wrap;
+        /* ยอมให้ไอเทมตกบรรทัดได้ */
+        height: auto;
+        /* เปลี่ยนจากกำหนดความสูงตายตัว เป็นยืดอัตโนมัติ */
+        padding: 10px 0;
+        /* เพิ่มพื้นที่ว่างบน-ล่างนิดหน่อยให้สวยงาม */
+      }
+
+      /* เปิดใช้งานตัวตัดบรรทัดให้กว้าง 100% เพื่อดันของที่เหลือลงไปข้างล่าง */
+      .flex-break {
+        display: block;
+        flex-basis: 100%;
+        height: 8px;
+        /* ระยะห่างระหว่างบรรทัดบนกับบรรทัดล่าง */
+      }
+
+      /* ปรับแต่ง Warning ให้ขนาดเล็กลงตามที่เคยตั้งไว้ */
+      .warning {
+        font-size: 10px;
+        margin-top: 2px;
+      }
+
+      /* ดัน Rate Badge ให้ไปชิดขวาสุดของบรรทัดล่าง */
+      .rate-badge {
+        margin-left: auto;
+      }
+    }
   </style>
 </head>
 
@@ -755,6 +785,9 @@
 
       <select class="set-select" id="setSelect" onchange="switchSet(this.value)"></select>
 
+      <div class="flex-break"></div>
+
+      <div class="warning">*** ราคานี้อ้างอิงจากที่ญี่ปุ่นเท่านั้น ***</div>
       <div class="rate-badge">¥100 = ฿20.11</div>
     </div>
   </header>
