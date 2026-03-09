@@ -1,358 +1,468 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONE PIECE CARD GAME — ราคาการ์ด</title>
-
+<title>OPCG Price List</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+Thai:wght@300;400;600;700&display=swap');
-:root {
-  --gold: #c9a84c;
-  --gold-light: #f0d080;
-  --dark: #0a0a0a;
-  --dark2: #141414;
-  --dark3: #1c1c1c;
-  --dark4: #222;
-  --red: #e83333;
-  --text: #e8e0d0;
-  --text-dim: #777;
-  --border: #2a2a2a;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--dark); color: var(--text); font-family: 'Noto Sans Thai', sans-serif; min-height: 100vh; }
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ── NAV ── */
-.topbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(10,10,10,0.96);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-  height: 52px;
-  display: flex; align-items: center; gap: 0;
-  padding: 0 16px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.topbar::-webkit-scrollbar { display: none; }
-.topbar-brand {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.25rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-  margin-right: 20px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-.nav-sep { width: 1px; height: 24px; background: #2a2a2a; margin: 0 6px; flex-shrink: 0; }
-.nav-btn {
-  display: flex; align-items: center; gap: 5px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 0.72rem;
-  font-family: 'Noto Sans Thai', sans-serif;
-  color: var(--text-dim);
-  text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: background 0.15s, color 0.15s;
-  border: 1px solid transparent;
-}
-.nav-btn:hover { background: rgba(201,168,76,0.1); color: var(--gold-light); border-color: rgba(201,168,76,0.3); }
-.nav-btn.active { background: rgba(201,168,76,0.15); color: var(--gold); border-color: var(--gold); }
-.nav-btn .dot {
-  width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0;
-}
+  :root {
+    --bg:#0a0a0f;--panel:#111118;--card:#16161f;--border:#2a2a3a;
+    --accent:#e63946;--gold:#ffd60a;--teal:#06b6d4;--green:#22c55e;
+    --text:#e8e8f0;--muted:#6b7280;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;}
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:linear-gradient(rgba(230,57,70,.03) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(230,57,70,.03) 1px,transparent 1px);
+    background-size:40px 40px;
+  }
 
-/* ── PAGE HEADER ── */
-.page-header {
-  margin-top: 52px;
-  padding: 28px 24px 20px;
-  background: linear-gradient(180deg, #111 0%, var(--dark) 100%);
-  border-bottom: 1px solid var(--border);
-}
-.page-header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-.set-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 0.2em; }
-.set-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: 0.06em;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  line-height: 1; margin-top: 2px;
-}
-.set-meta { font-size: 0.78rem; color: var(--text-dim); margin-top: 6px; }
-.rate-pill { display: inline-block; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.4); border-radius: 20px; padding: 3px 10px; font-size: 0.72rem; color: var(--gold-light); }
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,10,15,.96);backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);padding:0 20px;
+  }
+  .header-inner{max-width:1800px;margin:0 auto;display:flex;align-items:center;gap:16px;height:56px;}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--accent);
+    text-shadow:0 0 20px rgba(230,57,70,.5);flex-shrink:0;}
+  .logo span{color:var(--gold);}
 
-/* ── FILTER ── */
-.filter-wrap { max-width: 1400px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.filter-label-txt { font-size: 0.72rem; color: var(--text-dim); }
-.filter-btn {
-  padding: 3px 10px; border-radius: 12px; border: 1px solid #2a2a2a;
-  background: transparent; color: var(--text-dim); font-size: 0.7rem;
-  cursor: pointer; font-family: 'Noto Sans Thai', sans-serif;
-  transition: all 0.15s;
-}
-.filter-btn:hover { border-color: var(--gold); color: var(--gold-light); background: rgba(201,168,76,0.1); }
-.filter-btn.on { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.12); }
-.filter-divider { width: 1px; height: 16px; background: #2a2a2a; }
+  .set-tabs{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;flex:1;}
+  .set-tabs::-webkit-scrollbar{display:none;}
+  .set-tab{
+    padding:5px 12px;border-radius:5px;border:1px solid transparent;
+    background:transparent;color:var(--muted);
+    font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;
+    cursor:pointer;white-space:nowrap;transition:all .15s;letter-spacing:.5px;
+  }
+  .set-tab:hover{color:var(--text);border-color:var(--border);}
+  .set-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 0 10px rgba(230,57,70,.4);}
 
-/* ── GRID ── */
-.content { max-width: 1400px; margin: 0 auto; padding: 0 24px 60px; }
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
-}
+  .rate-badge{
+    font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);
+    background:var(--panel);border:1px solid var(--border);padding:3px 8px;border-radius:4px;flex-shrink:0;
+  }
 
-/* ── CARD ── */
-.card-item {
-  background: var(--dark3);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
-  position: relative;
-}
-.card-item:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
-.card-img-wrap { position: relative; aspect-ratio: 5/7; background: #111; overflow: hidden; }
-.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.3s; }
-.card-img-wrap img.loading { opacity: 0; }
-.card-img-wrap img.loaded { opacity: 1; }
-.card-num-badge {
-  position: absolute; bottom: 5px; left: 5px;
-  background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
-  border-radius: 3px; padding: 1px 5px;
-  font-size: 0.6rem; color: #aaa; font-family: monospace;
-}
-.rarity-pip {
-  position: absolute; top: 5px; right: 5px;
-  width: 7px; height: 7px; border-radius: 50%;
-}
-.card-info { padding: 6px 8px 8px; }
-.card-price-jpy { font-size: 0.88rem; font-weight: 700; color: var(--gold-light); }
-.card-price-thb { font-size: 0.72rem; color: #999; }
-.no-price { font-size: 0.7rem; color: #555; }
-.out-of-stock { font-size: 0.65rem; color: var(--red); margin-top: 2px; }
+  /* FILTER BAR */
+  .filter-bar{
+    background:var(--panel);border-bottom:1px solid var(--border);
+    padding:10px 20px;position:sticky;top:56px;z-index:90;
+  }
+  .filter-inner{max-width:1800px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .filter-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;flex-shrink:0;}
 
-/* rarity colors */
-.pip-psec { background:#ff3333; box-shadow:0 0 5px #ff3333; }
-.pip-sec  { background:#ff8c00; box-shadow:0 0 5px #ff8c00; }
-.pip-psr  { background:#c9a84c; box-shadow:0 0 4px #c9a84c; }
-.pip-sr   { background:#c0c0c0; box-shadow:0 0 4px #c0c0c0; }
-.pip-pr   { background:#7ab8ff; box-shadow:0 0 4px #7ab8ff; }
-.pip-r    { background:#4d9fff; }
-.pip-puc  { background:#c47aff; box-shadow:0 0 3px #c47aff; }
-.pip-uc   { background:#9955dd; }
-.pip-pc   { background:#66cc66; }
-.pip-c    { background:#555; }
+  .rarity-chips{display:flex;gap:3px;flex-wrap:wrap;}
+  .rarity-chip{
+    padding:2px 8px;border-radius:3px;border:1px solid var(--border);
+    background:var(--card);color:var(--muted);
+    font-family:'JetBrains Mono',monospace;font-size:10px;
+    cursor:pointer;transition:all .12s;user-select:none;
+  }
+  .rarity-chip:hover{border-color:currentColor;}
+  .rarity-chip.active{border-color:currentColor;background:rgba(255,255,255,.08);}
 
-.card-item.has-price:hover { border-color: var(--gold-light); }
-.card-item.no-stock-item { opacity: 0.6; }
+  /* rarity colors */
+  [data-r="P-SEC"]{color:#ff6b35}[data-r="SEC"]{color:#e63946}
+  [data-r="P-SR"]{color:#ffd60a}[data-r="SR"]{color:#f59e0b}
+  [data-r="P-R"]{color:#a855f7}[data-r="R"]{color:#818cf8}
+  [data-r="P-UC"]{color:#34d399}[data-r="UC"]{color:#22c55e}
+  [data-r="P-C"]{color:#60a5fa}[data-r="C"]{color:#94a3b8}
+  [data-r="P-L"]{color:#ff6b35}[data-r="L"]{color:#fb923c}
 
-/* link overlay */
-.card-link { position: absolute; inset: 0; z-index: 2; }
+  .vdiv{width:1px;height:22px;background:var(--border);flex-shrink:0;}
 
-/* view toggle */
-.view-toggle { display: flex; gap: 6px; }
-.view-btn { padding: 3px 10px; border-radius: 4px; border: 1px solid #2a2a2a; background: transparent; color: var(--text-dim); font-size: 0.7rem; cursor: pointer; font-family: 'Noto Sans Thai', sans-serif; transition: all 0.15s; }
-.view-btn.on { border-color: #555; color: var(--text); background: #222; }
+  .stock-toggle{display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;}
+  .toggle-sw{
+    width:34px;height:18px;background:var(--border);border-radius:9px;
+    position:relative;transition:background .2s;flex-shrink:0;
+  }
+  .toggle-sw::after{
+    content:'';position:absolute;top:2px;left:2px;
+    width:14px;height:14px;background:#fff;border-radius:50%;transition:transform .2s;
+  }
+  .toggle-sw.on{background:var(--green);}
+  .toggle-sw.on::after{transform:translateX(16px);}
+  .toggle-lbl{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.5px;}
 
-/* big grid mode */
-.cards-grid.big { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
-.cards-grid.small { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 6px; }
-.cards-grid.small .card-info { padding: 4px 6px 6px; }
-.cards-grid.small .card-price-jpy { font-size: 0.78rem; }
+  .top-sel{
+    appearance:none;background:var(--card);border:1px solid var(--border);
+    color:var(--text);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11px;
+    padding:3px 24px 3px 8px;border-radius:4px;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b7280' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 6px center;
+  }
+  .clear-btn{
+    padding:3px 10px;background:transparent;border:1px solid var(--border);
+    color:var(--muted);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11px;
+    border-radius:4px;cursor:pointer;transition:all .12s;letter-spacing:.5px;
+  }
+  .clear-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .fstats{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+  .fstats b{color:var(--gold);}
 
-/* count badge */
-.count-badge { font-size: 0.75rem; color: var(--text-dim); margin-left: auto; }
+  /* CONTENT */
+  .content{max-width:1800px;margin:0 auto;padding:16px 20px;position:relative;z-index:1;}
 
-/* footer */
-.page-footer { text-align: center; font-size: 0.68rem; color: #444; padding: 20px; border-top: 1px solid #1a1a1a; }
-.page-footer a { color: #666; }
-</style>
+  .set-header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+  .set-id{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--accent);}
+  .set-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;line-height:1;}
+  .set-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-left:auto;}
 
-<style>
-.hero {
-  margin-top: 52px;
-  padding: 60px 24px 40px;
-  text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, #1a0f00 0%, var(--dark) 70%);
-  border-bottom: 1px solid var(--border);
-}
-.hero-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  letter-spacing: 0.1em;
-  background: linear-gradient(135deg, #c9a84c, #f0d080, #c9a84c);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  line-height: 1;
-}
-.hero-sub { font-size: 0.9rem; color: var(--text-dim); margin-top: 10px; }
-.hero-rate { display: inline-block; margin-top: 12px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.35); border-radius: 20px; padding: 4px 14px; font-size: 0.78rem; color: var(--gold-light); }
+  /* TOP BANNER */
+  #topBanner{
+    margin-bottom:16px;padding:14px 16px;
+    background:linear-gradient(135deg,rgba(255,214,10,.05),rgba(230,57,70,.05));
+    border:1px solid rgba(255,214,10,.15);border-radius:8px;
+  }
+  #topBanner.hidden{display:none;}
+  .top-banner-ttl{
+    font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;
+    color:var(--gold);margin-bottom:10px;
+  }
+  .top-list{display:flex;flex-wrap:wrap;gap:6px;}
+  .top-item{
+    display:flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.03);border:1px solid var(--border);
+    border-radius:5px;padding:5px 10px;cursor:pointer;transition:all .12s;
+  }
+  .top-item:hover{border-color:var(--gold);}
+  .top-rank{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gold);line-height:1;min-width:18px;}
+  .top-name{font-size:12px;font-weight:600;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .top-price{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);font-weight:600;}
 
-.sets-grid {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 0 24px 60px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
-}
-.set-card {
-  background: var(--dark3);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px 16px;
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  transition: transform 0.18s, border-color 0.18s, background 0.18s;
-  position: relative;
-  overflow: hidden;
-}
-.set-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0;
-  transition: opacity 0.18s;
-}
-.set-card:hover { transform: translateY(-3px); border-color: var(--gold); background: #222; }
-.set-card:hover::before { opacity: 1; }
-.set-card-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 0.08em; }
-.set-card-name { font-size: 0.82rem; font-weight: 600; color: var(--text); line-height: 1.3; margin-top: 2px; }
-.set-card-meta { font-size: 0.7rem; color: var(--text-dim); margin-top: 4px; }
-.set-card-arrow { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--text-dim); transition: color 0.18s, right 0.18s; }
-.set-card:hover .set-card-arrow { color: var(--gold); right: 12px; }
+  /* CARD GRID */
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;}
 
-.section-title {
-  text-align: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.2em;
-  color: var(--text-dim);
-  margin: 30px 0 0;
-  padding: 0 24px;
-}
+  .rarity-section{grid-column:1/-1;display:flex;align-items:center;gap:8px;padding:6px 0 2px;}
+  .rarity-section-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;}
+  .rarity-section-line{flex:1;height:1px;background:currentColor;opacity:.15;}
+  .rarity-section-ct{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+
+  .price-card{
+    background:var(--card);border:1px solid var(--border);border-radius:7px;
+    overflow:hidden;cursor:pointer;transition:all .18s;position:relative;
+  }
+  .price-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.15);box-shadow:0 8px 20px rgba(0,0,0,.4);}
+  .price-card.out-of-stock{opacity:.45;}
+  .price-card.out-of-stock:hover{opacity:.75;}
+  .price-card.highlighted{border-color:var(--gold)!important;box-shadow:0 0 14px rgba(255,214,10,.25)!important;}
+  .price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--stripe);}
+
+  .card-img-wrap{aspect-ratio:100/140;overflow:hidden;background:var(--panel);position:relative;}
+  .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .3s;}
+  .price-card:hover .card-img-wrap img{transform:scale(1.05);}
+  .card-no-img{
+    width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    color:var(--muted);font-size:10px;font-family:'JetBrains Mono',monospace;
+  }
+
+  .card-body{padding:7px;}
+  .card-code{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-bottom:2px;}
+  .card-name{font-size:11px;font-weight:700;line-height:1.3;margin-bottom:5px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .card-rarity{
+    font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:500;
+    padding:1px 4px;border-radius:2px;border:1px solid currentColor;
+    display:inline-block;margin-bottom:5px;
+  }
+  .card-prices{display:flex;justify-content:space-between;align-items:baseline;gap:4px;}
+  .price-jpy{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--gold);line-height:1;}
+  .price-jpy .yen{font-size:9px;opacity:.7;}
+  .price-thb{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--teal);opacity:.85;}
+
+  .stock-dot{position:absolute;top:7px;right:7px;width:5px;height:5px;border-radius:50%;}
+  .stock-dot.in{background:var(--green);box-shadow:0 0 5px var(--green);}
+  .stock-dot.out{background:var(--muted);}
+
+  .oos-badge{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    background:rgba(0,0,0,.75);border:1px solid var(--muted);color:var(--muted);
+    font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;
+    padding:2px 5px;border-radius:2px;letter-spacing:1px;
+    pointer-events:none;opacity:0;transition:opacity .15s;
+  }
+  .price-card.out-of-stock:hover .oos-badge{opacity:1;}
+
+  .empty-state{grid-column:1/-1;text-align:center;padding:50px;color:var(--muted);}
+  .empty-state .ico{font-size:36px;margin-bottom:10px;}
+
+  ::-webkit-scrollbar{width:5px;height:5px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+  @media(max-width:640px){
+    .card-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
+    .set-title{font-size:20px;}
+  }
 </style>
 </head>
 <body>
 
-<nav class="topbar">
-  <a class="topbar-brand" href="index.html">⚓ OPCG</a>
-  <div class="nav-sep"></div>
-  <a class="nav-btn" href="op01.html" id="nav-op01"><span class="dot"></span>OP-01</a><a class="nav-btn" href="op02.html" id="nav-op02"><span class="dot"></span>OP-02</a><a class="nav-btn" href="op03.html" id="nav-op03"><span class="dot"></span>OP-03</a><a class="nav-btn" href="op04.html" id="nav-op04"><span class="dot"></span>OP-04</a><a class="nav-btn" href="op05.html" id="nav-op05"><span class="dot"></span>OP-05</a><a class="nav-btn" href="op06.html" id="nav-op06"><span class="dot"></span>OP-06</a><a class="nav-btn" href="op07.html" id="nav-op07"><span class="dot"></span>OP-07</a><a class="nav-btn" href="op08.html" id="nav-op08"><span class="dot"></span>OP-08</a><a class="nav-btn" href="op09.html" id="nav-op09"><span class="dot"></span>OP-09</a><a class="nav-btn" href="op10.html" id="nav-op10"><span class="dot"></span>OP-10</a><a class="nav-btn" href="op11.html" id="nav-op11"><span class="dot"></span>OP-11</a><a class="nav-btn" href="op12.html" id="nav-op12"><span class="dot"></span>OP-12</a><a class="nav-btn" href="op13.html" id="nav-op13"><span class="dot"></span>OP-13</a><a class="nav-btn" href="op14.html" id="nav-op14"><span class="dot"></span>OP-14</a><a class="nav-btn" href="op15.html" id="nav-op15"><span class="dot"></span>OP-15</a>
-</nav>
+<header>
+  <div class="header-inner">
+    <div class="logo">OPCG <span>PRICES</span></div>
+    <div class="set-tabs" id="setTabs"></div>
+    <div class="rate-badge">¥100 = ฿20.11</div>
+  </div>
+</header>
 
-<div class="hero">
-  <div class="hero-title">ONE PIECE CARD GAME</div>
-  <div class="hero-sub">ราคาการ์ดทุกชุด OP-01 ถึง OP-15</div>
-  <div class="hero-rate">100 ¥ = 20.11 ฿ (มี.ค. 2569) · ราคาจาก yuyu-tei.jp</div>
+<div class="filter-bar">
+  <div class="filter-inner">
+    <span class="filter-label">RARITY</span>
+    <div class="rarity-chips" id="rarityChips"></div>
+    <div class="vdiv"></div>
+    <label class="stock-toggle" onclick="toggleStock()">
+      <div class="toggle-sw" id="stockSw"></div>
+      <span class="toggle-lbl">IN STOCK ONLY</span>
+    </label>
+    <div class="vdiv"></div>
+    <span class="filter-label">SHOW</span>
+    <select class="top-sel" id="topSel" onchange="render()">
+      <option value="0">ALL CARDS</option>
+      <option value="10">TOP 10</option>
+      <option value="20">TOP 20</option>
+    </select>
+    <button class="clear-btn" onclick="clearAll()">CLEAR</button>
+    <div class="fstats" id="fstats"></div>
+  </div>
 </div>
 
-<div class="section-title">เลือกชุดการ์ด</div>
-
-<div class="sets-grid">
-  
-    <a class="set-card" href="op01.html">
-      <div class="set-card-label">OP-01</div>
-      <div class="set-card-name">ROMANCE DAWN</div>
-      <div class="set-card-meta">121 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op02.html">
-      <div class="set-card-label">OP-02</div>
-      <div class="set-card-name">Paramount War</div>
-      <div class="set-card-meta">121 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op03.html">
-      <div class="set-card-label">OP-03</div>
-      <div class="set-card-name">Pillars of Strength</div>
-      <div class="set-card-meta">121 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op04.html">
-      <div class="set-card-label">OP-04</div>
-      <div class="set-card-name">Kingdoms of Intrigue</div>
-      <div class="set-card-meta">121 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op05.html">
-      <div class="set-card-label">OP-05</div>
-      <div class="set-card-name">Awakening of the New Era</div>
-      <div class="set-card-meta">122 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op06.html">
-      <div class="set-card-label">OP-06</div>
-      <div class="set-card-name">Wings of the Captain</div>
-      <div class="set-card-meta">120 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op07.html">
-      <div class="set-card-label">OP-07</div>
-      <div class="set-card-name">500 Years in the Future</div>
-      <div class="set-card-meta">121 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op08.html">
-      <div class="set-card-label">OP-08</div>
-      <div class="set-card-name">Two Legends</div>
-      <div class="set-card-meta">121 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op09.html">
-      <div class="set-card-label">OP-09</div>
-      <div class="set-card-name">Emperors in the New World</div>
-      <div class="set-card-meta">124 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op10.html">
-      <div class="set-card-label">OP-10</div>
-      <div class="set-card-name">Royal Blood</div>
-      <div class="set-card-meta">121 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op11.html">
-      <div class="set-card-label">OP-11</div>
-      <div class="set-card-name">A Fist of Divine Speed</div>
-      <div class="set-card-meta">122 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op12.html">
-      <div class="set-card-label">OP-12</div>
-      <div class="set-card-name">Legacy of the Master</div>
-      <div class="set-card-meta">122 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op13.html">
-      <div class="set-card-label">OP-13</div>
-      <div class="set-card-name">Carrying on His Will</div>
-      <div class="set-card-meta">122 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op14.html">
-      <div class="set-card-label">OP-14</div>
-      <div class="set-card-name">The Azure Sea's Seven</div>
-      <div class="set-card-meta">125 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
-    <a class="set-card" href="op15.html">
-      <div class="set-card-label">OP-15</div>
-      <div class="set-card-name">Adventure on KAMI's Island</div>
-      <div class="set-card-meta">122 การ์ด</div>
-      <div class="set-card-arrow">→</div>
-    </a>
+<div class="content">
+  <div class="set-header">
+    <div class="set-id" id="setId">OP-01</div>
+    <div class="set-title" id="setTitle">ROMANCE DAWN</div>
+    <div class="set-count" id="setCt"></div>
+  </div>
+  <div id="topBanner" class="hidden"></div>
+  <div class="card-grid" id="grid"></div>
 </div>
 
-<footer class="page-footer">
-  ราคาจาก <a href="https://yuyu-tei.jp/top/opc" target="_blank">yuyu-tei.jp</a> ·
-  รูปภาพจาก <a href="https://asia-th.onepiece-cardgame.com" target="_blank">onepiece-cardgame.com</a>
-</footer>
+<script>
+const SETS=[
+  {id:'op01',lb:'OP-01',nm:'ROMANCE DAWN'},
+  {id:'op02',lb:'OP-02',nm:'PARAMOUNT WAR'},
+  {id:'op03',lb:'OP-03',nm:'PILLARS OF STRENGTH'},
+  {id:'op04',lb:'OP-04',nm:'KINGDOMS OF INTRIGUE'},
+  {id:'op05',lb:'OP-05',nm:'AWAKENING OF THE NEW ERA'},
+  {id:'op06',lb:'OP-06',nm:'WINGS OF THE CAPTAIN'},
+  {id:'op07',lb:'OP-07',nm:'500 YEARS IN THE FUTURE'},
+  {id:'op08',lb:'OP-08',nm:'TWO LEGENDS'},
+  {id:'op09',lb:'OP-09',nm:'EMPERORS IN THE NEW WORLD'},
+  {id:'op10',lb:'OP-10',nm:'ROYAL BLOOD'},
+  {id:'op11',lb:'OP-11',nm:'A FIST OF DIVINE SPEED'},
+  {id:'op12',lb:'OP-12',nm:'LEGACY OF THE MASTER'},
+  {id:'op13',lb:'OP-13',nm:'CARRYING ON HIS WILL'},
+  {id:'op14',lb:'OP-14',nm:"THE AZURE SEA'S SEVEN"},
+  {id:'op15',lb:'OP-15',nm:"ADVENTURE ON KAMI'S ISLAND"},
+];
 
+const RARITY_ORD=['P-SEC','SEC','P-SR','SR','P-R','R','P-UC','UC','P-C','C','P-L','L','SP'];
+const RC={
+  'P-SEC':'#ff6b35','SEC':'#e63946','P-SR':'#ffd60a','SR':'#f59e0b',
+  'P-R':'#a855f7','R':'#818cf8','P-UC':'#34d399','UC':'#22c55e',
+  'P-C':'#60a5fa','C':'#94a3b8','P-L':'#ff6b35','L':'#fb923c','SP':'#ec4899'
+};
+
+const RATE=0.2011;
+let curSet='op01', prices={}, activeR=new Set(), stockOnly=false;
+
+async function init(){
+  buildTabs(); buildChips();
+  try{
+    const r=await fetch('prices.json');
+    prices=await r.json();
+  }catch(e){prices={};}
+  render();
+}
+
+function buildTabs(){
+  const c=document.getElementById('setTabs');
+  SETS.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='set-tab'+(s.id===curSet?' active':'');
+    b.textContent=s.lb;
+    b.onclick=()=>switchSet(s.id);
+    c.appendChild(b);
+  });
+}
+
+function buildChips(){
+  const c=document.getElementById('rarityChips');
+  RARITY_ORD.forEach(r=>{
+    const d=document.createElement('div');
+    d.className='rarity-chip';
+    d.setAttribute('data-r',r);
+    d.textContent=r;
+    d.onclick=()=>toggleR(r);
+    c.appendChild(d);
+  });
+}
+
+function switchSet(id){
+  curSet=id;
+  document.querySelectorAll('.set-tab').forEach((t,i)=>t.classList.toggle('active',SETS[i].id===id));
+  render();
+}
+
+function toggleR(r){
+  activeR.has(r)?activeR.delete(r):activeR.add(r);
+  document.querySelectorAll('.rarity-chip').forEach(c=>c.classList.toggle('active',activeR.has(c.getAttribute('data-r'))));
+  render();
+}
+
+function toggleStock(){
+  stockOnly=!stockOnly;
+  document.getElementById('stockSw').classList.toggle('on',stockOnly);
+  render();
+}
+
+function clearAll(){
+  activeR.clear(); stockOnly=false;
+  document.querySelectorAll('.rarity-chip').forEach(c=>c.classList.remove('active'));
+  document.getElementById('stockSw').classList.remove('on');
+  document.getElementById('topSel').value='0';
+  render();
+}
+
+function imgUrl(key){
+  const base=key.split('_')[0];
+  const parts=base.split('-');
+  return `https://asia-th.onepiece-cardgame.com/images/cardlist/card/${parts[0].toUpperCase()}-${parts[1]}.png?240426`;
+}
+
+function render(){
+  const set=SETS.find(s=>s.id===curSet);
+  document.getElementById('setId').textContent=set.lb;
+  document.getElementById('setTitle').textContent=set.nm;
+
+  const raw=prices[curSet]||{};
+  const topN=parseInt(document.getElementById('topSel').value);
+
+  let cards=Object.entries(raw)
+    .filter(([k])=>k!=='_meta')
+    .map(([key,c])=>({key,...c}));
+
+  if(activeR.size>0) cards=cards.filter(c=>activeR.has(c.rarity));
+  if(stockOnly) cards=cards.filter(c=>c.stock);
+
+  cards.sort((a,b)=>{
+    const ro=RARITY_ORD.indexOf(a.rarity)-RARITY_ORD.indexOf(b.rarity);
+    return ro!==0?ro:(b.jpy||0)-(a.jpy||0);
+  });
+
+  document.getElementById('fstats').innerHTML=
+    `Showing <b>${cards.length}</b> of <b>${Object.keys(raw).length}</b>`;
+  document.getElementById('setCt').textContent=`${Object.keys(raw).length} entries`;
+
+  // TOP N
+  const banner=document.getElementById('topBanner');
+  let displayCards=cards;
+  if(topN>0){
+    const sorted=[...cards].sort((a,b)=>(b.jpy||0)-(a.jpy||0));
+    const topCards=sorted.slice(0,topN);
+    banner.innerHTML=buildBanner(topCards,topN,set.lb);
+    banner.className='';
+    displayCards=[...cards].sort((a,b)=>(b.jpy||0)-(a.jpy||0)).slice(0,topN);
+  } else {
+    banner.className='hidden';
+  }
+
+  const grid=document.getElementById('grid');
+  grid.innerHTML='';
+
+  if(displayCards.length===0){
+    grid.innerHTML='<div class="empty-state"><div class="ico">🃏</div><p>No cards match your filters</p></div>';
+    return;
+  }
+
+  if(topN>0){
+    displayCards.forEach((c,i)=>{
+      const el=makeCard(c);
+      // add rank badge
+      const rank=document.createElement('div');
+      rank.style.cssText='position:absolute;top:4px;left:4px;font-family:Bebas Neue,sans-serif;font-size:20px;color:#ffd60a;text-shadow:0 1px 4px rgba(0,0,0,.8);line-height:1;z-index:2;';
+      rank.textContent=i+1;
+      el.appendChild(rank);
+      grid.appendChild(el);
+    });
+  } else {
+    // group by rarity
+    const groups={};
+    displayCards.forEach(c=>{
+      if(!groups[c.rarity]) groups[c.rarity]=[];
+      groups[c.rarity].push(c);
+    });
+    RARITY_ORD.forEach(r=>{
+      if(!groups[r]?.length) return;
+      const color=RC[r]||'#fff';
+      const gh=document.createElement('div');
+      gh.className='rarity-section';
+      gh.style.color=color;
+      gh.innerHTML=`<div class="rarity-section-title">${r}</div><div class="rarity-section-line"></div><div class="rarity-section-ct">${groups[r].length} cards</div>`;
+      grid.appendChild(gh);
+      groups[r].forEach(c=>grid.appendChild(makeCard(c)));
+    });
+  }
+}
+
+function buildBanner(top,n,lb){
+  return `
+  <div class="top-banner-ttl">🏆 TOP ${n} — ${lb} MOST EXPENSIVE</div>
+  <div class="top-list">
+    ${top.map((c,i)=>`
+      <div class="top-item" onclick="highlight('${c.key}')">
+        <div class="top-rank">${i+1}</div>
+        <div>
+          <div class="top-name">${c.name}</div>
+          <div style="margin-top:2px;font-family:'JetBrains Mono',monospace;font-size:9px;color:${RC[c.rarity]||'#fff'}">${c.rarity}</div>
+        </div>
+        <div class="top-price">¥${(c.jpy||0).toLocaleString()}</div>
+      </div>
+    `).join('')}
+  </div>`;
+}
+
+function makeCard(card){
+  const color=RC[card.rarity]||'#fff';
+  const thb=card.thb||Math.round((card.jpy||0)*RATE);
+  const el=document.createElement('div');
+  el.className='price-card'+(card.stock?'':' out-of-stock');
+  el.setAttribute('data-key',card.key);
+  el.style.setProperty('--stripe',color);
+
+  el.innerHTML=`
+    <div class="card-img-wrap">
+      <img src="${imgUrl(card.key)}" alt="${card.name}" loading="lazy"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-no-img" style="display:none">${card.key.split('_')[0]}</div>
+    </div>
+    <div class="oos-badge">OOS</div>
+    <div class="stock-dot ${card.stock?'in':'out'}"></div>
+    <div class="card-body">
+      <div class="card-code">${card.key.split('_')[0]}</div>
+      <div class="card-name">${card.name}</div>
+      <div class="card-rarity" style="color:${color};border-color:${color}">${card.rarity}</div>
+      <div class="card-prices">
+        <div class="price-jpy"><span class="yen">¥</span>${(card.jpy||0).toLocaleString()}</div>
+        <div class="price-thb">฿${thb.toLocaleString()}</div>
+      </div>
+    </div>
+  `;
+  el.onclick=()=>window.open(`https://yuyu-tei.jp/sell/opc/s/${curSet}`,'_blank');
+  return el;
+}
+
+function highlight(key){
+  document.querySelectorAll('.price-card').forEach(e=>e.classList.remove('highlighted'));
+  const t=document.querySelector(`[data-key="${key}"]`);
+  if(t){t.classList.add('highlighted');t.scrollIntoView({behavior:'smooth',block:'center'});}
+}
+
+init();
+</script>
 </body>
 </html>
