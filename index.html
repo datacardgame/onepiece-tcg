@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPCG Price List</title>
+<title>DATA Card Game Price</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -27,9 +27,19 @@
     border-bottom:1px solid var(--border);padding:0 20px;
   }
   .header-inner{max-width:1800px;margin:0 auto;display:flex;align-items:center;gap:16px;height:56px;}
-  .logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--accent);
-    text-shadow:0 0 20px rgba(230,57,70,.5);flex-shrink:0;}
-  .logo span{color:var(--gold);}
+  .logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  }
+
+  .logo img {
+    width: 120px;   /* ฟิกซ์ความกว้างที่ 200px */
+    height: 40px;   /* ฟิกซ์ความสูงที่ 66px */
+    object-fit: contain; /* 💡 แนะนำให้ใส่ตัวนี้ไว้ เพื่อให้รูปไม่เบี้ยวหรือยืด ในกรณีที่สัดส่วนรูปดั้งเดิมไม่ได้พอดีเป๊ะ */
+    display: block;
+  }
 
   .set-tabs{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;flex:1;}
   .set-tabs::-webkit-scrollbar{display:none;}
@@ -204,7 +214,9 @@
 
 <header>
   <div class="header-inner">
-    <div class="logo">OPCG <span>PRICES</span></div>
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="OPCG Prices Logo">
+    </a>
     <div class="set-tabs" id="setTabs"></div>
     <div class="rate-badge">¥100 = ฿20.11</div>
   </div>
