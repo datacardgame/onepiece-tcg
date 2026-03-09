@@ -715,10 +715,11 @@
 
       .set-select {
         display: block;
-        /* แสดง Dropdown */
         flex: 1;
-        /* ให้ยืดเต็มพื้นที่ตรงกลาง */
-        margin: 0 10px;
+        max-width: 300px;
+        /* 🟢 จำกัดความกว้างสูงสุดที่ 300px */
+        margin: 0 auto;
+        /* 🟢 ให้อยู่กึ่งกลางตรงช่องว่างพอดี */
         appearance: none;
         background: var(--card);
         border: 1px solid var(--border);
@@ -729,10 +730,14 @@
         padding: 6px 24px 6px 10px;
         border-radius: 5px;
         cursor: pointer;
-        /* ใส่ลูกศรชี้ลง */
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b7280' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 8px center;
+
+        /* 🟢 ป้องกันข้อความชื่อชุดยาวเกินไป แล้วเปลี่ยนเป็น ... แทน */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   </style>
