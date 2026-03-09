@@ -328,12 +328,14 @@ function clearAll(){
   render();
 }
 
-function imgUrl(key){
-  const base=key.match(/^([A-Za-z0-9]+-\d+)/)[1];  // e.g. "OP01-120" from "OP01-120_psec_sp"
-  const suffix=key.includes('_psec_sp')||key.includes('_psr_sp')?'_p2':
-               key.includes('_psec')||key.includes('_psr')||key.includes('_pr')||
-               key.includes('_puc')||key.includes('_pc')||key.includes('_pl')?'_p1':'';
-  return `https://asia-th.onepiece-cardgame.com/images/cardlist/card/${base.toUpperCase()}${suffix}.png?240426`;
+function imgUrl(key) {
+  // key ของเราตอนนี้มาในรูปแบบ "OP01-120", "OP01-120_p1", "OP01-120_p2" อยู่แล้ว
+  // แค่แยกส่วนหน้ามาทำเป็นพิมพ์ใหญ่ (เผื่อพิมพ์เล็กหลุดมา) และส่วน _p1 เป็นพิมพ์เล็ก
+  const parts = key.split('_');
+  const base = parts[0].toUpperCase();
+  const suffix = parts.length > 1 ? '_' + parts[1].toLowerCase() : '';
+  
+  return `https://asia-th.onepiece-cardgame.com/images/cardlist/card/${base}${suffix}.png?240426`;
 }
 
 function render(){
