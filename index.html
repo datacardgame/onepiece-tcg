@@ -6,6 +6,7 @@
 <title>DATA Card Game Price</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
 
   :root {
     --bg:#0a0a0f;--panel:#111118;--card:#16161f;--border:#2a2a3a;
@@ -35,9 +36,9 @@
   }
 
   .logo img {
-    width: 120px;   /* ฟิกซ์ความกว้างที่ 200px */
-    height: 40px;   /* ฟิกซ์ความสูงที่ 66px */
-    object-fit: contain; /* 💡 แนะนำให้ใส่ตัวนี้ไว้ เพื่อให้รูปไม่เบี้ยวหรือยืด ในกรณีที่สัดส่วนรูปดั้งเดิมไม่ได้พอดีเป๊ะ */
+    width: 120px;
+    height: 40px;
+    object-fit: contain;
     display: block;
   }
 
@@ -52,6 +53,9 @@
   .set-tab:hover{color:var(--text);border-color:var(--border);}
   .set-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 0 10px rgba(230,57,70,.4);}
 
+  .warning{
+    font-family:'Sarabun',monospace;font-size:20px;color:#e63946;
+  }
   .rate-badge{
     font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);
     background:var(--panel);border:1px solid var(--border);padding:3px 8px;border-radius:4px;flex-shrink:0;
@@ -218,6 +222,7 @@
       <img src="logo.png" alt="OPCG Prices Logo">
     </a>
     <div class="set-tabs" id="setTabs"></div>
+    <div class="warning">*** ราคานี้อ้างอิงจากทางญี่ปุ่นเท่านั้น ***</div>
     <div class="rate-badge">¥100 = ฿20.11</div>
   </div>
 </header>
