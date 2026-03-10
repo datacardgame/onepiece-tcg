@@ -120,20 +120,6 @@
       border-color: var(--border);
     }
 
-
-    .set-tab.all-tab {
-      background: rgba(255,214,10,0.08);
-      color: #ffd60a;
-      border-color: rgba(255,214,10,0.25);
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .set-tab.all-tab.active {
-      background: #ffd60a;
-      color: #0a0a0f;
-      border-color: #ffd60a;
-      box-shadow: 0 0 14px rgba(255,214,10,.55);
-    }
     .set-tab.active {
       background: var(--accent);
       color: #fff;
@@ -506,7 +492,7 @@
       border: 1px solid var(--border);
       border-radius: 7px;
       overflow: hidden;
-      cursor: pointer;
+      cursor: zoom-in;
       transition: all .18s;
       position: relative;
     }
@@ -784,6 +770,66 @@
         margin-left: auto;
       }
     }
+
+    /* ── CARD DIALOG ── */
+    .card-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(5, 5, 10, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease;
+    }
+    .card-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .card-dialog {
+      position: relative;
+      width: min(300px, 80vw);
+      transform: scale(.86) translateY(20px);
+      transition: transform .3s cubic-bezier(.34,1.3,.64,1);
+    }
+    .card-overlay.open .card-dialog {
+      transform: scale(1) translateY(0);
+    }
+    .card-dialog img {
+      width: 100%;
+      border-radius: 14px;
+      display: block;
+      box-shadow: 0 30px 80px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.07);
+    }
+    .card-dialog-close {
+      position: absolute;
+      top: -12px; right: -12px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: #1e1e2a;
+      border: 1px solid #3a3a50;
+      color: #aaa;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s, color .15s;
+      z-index: 1;
+      line-height: 1;
+    }
+    .card-dialog-close:hover { background: #e63946; border-color: #e63946; color: #fff; }
+    .card-dialog-label {
+      margin-top: 8px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #555;
+      letter-spacing: 1px;
+    }
   </style>
 </head>
 
@@ -833,6 +879,16 @@
     <div class="card-grid" id="grid"></div>
   </div>
 
+
+  <!-- CARD DIALOG OVERLAY -->
+  <div class="card-overlay" id="cardOverlay" onclick="cardOverlayClick(event)">
+    <div class="card-dialog" id="cardDialog">
+      <button class="card-dialog-close" onclick="closeCardDialog()">✕</button>
+      <img id="cardDialogImg" src="" alt="">
+      <div class="card-dialog-label" id="cardDialogLabel"></div>
+    </div>
+  </div>
+
   <script>
     const SETS = [
       { id: 'op01', lb: 'OP-01', nm: 'ROMANCE DAWN' },
@@ -873,34 +929,20 @@
 
     function buildTabs() {
       const c = document.getElementById('setTabs');
-      const sel = document.getElementById('setSelect');
-
-      // ALL tab — PC
-      const allBtn = document.createElement('button');
-      allBtn.id = 'tab-all';
-      allBtn.className = 'set-tab all-tab' + (curSet === 'all' ? ' active' : '');
-      allBtn.textContent = '⚡ ALL';
-      allBtn.onclick = () => switchSet('all');
-      c.appendChild(allBtn);
-
-      // ALL option — มือถือ
-      const allOpt = document.createElement('option');
-      allOpt.value = 'all';
-      allOpt.textContent = '⚡ ALL SETS — ทุก OP';
-      if (curSet === 'all') allOpt.selected = true;
-      sel.appendChild(allOpt);
+      const sel = document.getElementById('setSelect'); // ดึง Dropdown มา
 
       SETS.forEach(s => {
+        // 1. สร้างปุ่มสำหรับ PC
         const b = document.createElement('button');
-        b.id = 'tab-' + s.id;
         b.className = 'set-tab' + (s.id === curSet ? ' active' : '');
         b.textContent = s.lb;
         b.onclick = () => switchSet(s.id);
         c.appendChild(b);
 
+        // 2. สร้าง Option สำหรับมือถือ
         const opt = document.createElement('option');
         opt.value = s.id;
-        opt.textContent = `${s.lb} - ${s.nm}`;
+        opt.textContent = `${s.lb} - ${s.nm}`; // โชว์รหัสคู่กับชื่อชุด
         if (s.id === curSet) opt.selected = true;
         sel.appendChild(opt);
       });
@@ -920,13 +962,14 @@
 
     function switchSet(id) {
       curSet = id;
-      // PC tabs — ใช้ id attribute แทน index เพื่อรองรับ ALL
-      document.querySelectorAll('.set-tab').forEach(t => {
-        const tid = t.id.replace('tab-', '');
-        t.classList.toggle('active', tid === id);
-      });
+
+      // อัปเดตสีปุ่มบน PC
+      document.querySelectorAll('.set-tab').forEach((t, i) => t.classList.toggle('active', SETS[i].id === id));
+
+      // อัปเดต Dropdown บนมือถือให้ตรงกัน (เผื่อกดจาก PC แล้วย่อจอ)
       const sel = document.getElementById('setSelect');
       if (sel) sel.value = id;
+
       render();
     }
 
@@ -961,25 +1004,11 @@
     }
 
     function render() {
-      const isAll = curSet === 'all';
-      const set = isAll
-        ? { lb: 'ALL SETS', nm: 'OP-01 → OP-15' }
-        : SETS.find(s => s.id === curSet);
-
+      const set = SETS.find(s => s.id === curSet);
       document.getElementById('setId').textContent = set.lb;
       document.getElementById('setTitle').textContent = set.nm;
 
-      // รวม card จากทุก set เมื่อเลือก ALL
-      let raw = {};
-      if (isAll) {
-        SETS.forEach(s => {
-          const sd = prices[s.id] || {};
-          Object.entries(sd).forEach(([k, v]) => { if (k !== '_meta') raw[k] = v; });
-        });
-      } else {
-        raw = prices[curSet] || {};
-      }
-
+      const raw = prices[curSet] || {};
       const topN = parseInt(document.getElementById('topSel').value);
 
       let cards = Object.entries(raw)
@@ -994,10 +1023,9 @@
         return ro !== 0 ? ro : (b.jpy || 0) - (a.jpy || 0);
       });
 
-      const totalRaw = Object.keys(raw).filter(k => k !== '_meta').length;
       document.getElementById('fstats').innerHTML =
-        `Showing <b>${cards.length}</b> of <b>${totalRaw}</b>`;
-      document.getElementById('setCt').textContent = `${totalRaw} entries`;
+        `Showing <b>${cards.length}</b> of <b>${Object.keys(raw).length}</b>`;
+      document.getElementById('setCt').textContent = `${Object.keys(raw).length} entries`;
 
       // TOP N
       const banner = document.getElementById('topBanner');
@@ -1072,6 +1100,7 @@
       const thb = card.thb || Math.round((card.jpy || 0) * RATE);
       const el = document.createElement('div');
       el.className = 'price-card' + (card.stock ? '' : '');
+      el.onclick = () => openCardDialog(card.image_url, card.key, card.name);
       el.setAttribute('data-key', card.key);
       el.style.setProperty('--stripe', color);
 
@@ -1100,6 +1129,26 @@
       const t = document.querySelector(`[data-key="${key}"]`);
       if (t) { t.classList.add('highlighted'); t.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
     }
+
+    function openCardDialog(url, key, name) {
+      document.getElementById('cardDialogImg').src = url;
+      document.getElementById('cardDialogLabel').textContent = key.split('_')[0] + (name ? '  ·  ' + name : '');
+      document.getElementById('cardOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCardDialog() {
+      document.getElementById('cardOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function cardOverlayClick(e) {
+      if (e.target === document.getElementById('cardOverlay')) closeCardDialog();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeCardDialog();
+    });
 
     init();
   </script>
