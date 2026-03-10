@@ -120,6 +120,20 @@
       border-color: var(--border);
     }
 
+
+    .set-tab.all-tab {
+      background: rgba(255,214,10,0.08);
+      color: #ffd60a;
+      border-color: rgba(255,214,10,0.25);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .set-tab.all-tab.active {
+      background: #ffd60a;
+      color: #0a0a0f;
+      border-color: #ffd60a;
+      box-shadow: 0 0 14px rgba(255,214,10,.55);
+    }
     .set-tab.active {
       background: var(--accent);
       color: #fff;
@@ -859,20 +873,34 @@
 
     function buildTabs() {
       const c = document.getElementById('setTabs');
-      const sel = document.getElementById('setSelect'); // ดึง Dropdown มา
+      const sel = document.getElementById('setSelect');
+
+      // ALL tab — PC
+      const allBtn = document.createElement('button');
+      allBtn.id = 'tab-all';
+      allBtn.className = 'set-tab all-tab' + (curSet === 'all' ? ' active' : '');
+      allBtn.textContent = '⚡ ALL';
+      allBtn.onclick = () => switchSet('all');
+      c.appendChild(allBtn);
+
+      // ALL option — มือถือ
+      const allOpt = document.createElement('option');
+      allOpt.value = 'all';
+      allOpt.textContent = '⚡ ALL SETS — ทุก OP';
+      if (curSet === 'all') allOpt.selected = true;
+      sel.appendChild(allOpt);
 
       SETS.forEach(s => {
-        // 1. สร้างปุ่มสำหรับ PC
         const b = document.createElement('button');
+        b.id = 'tab-' + s.id;
         b.className = 'set-tab' + (s.id === curSet ? ' active' : '');
         b.textContent = s.lb;
         b.onclick = () => switchSet(s.id);
         c.appendChild(b);
 
-        // 2. สร้าง Option สำหรับมือถือ
         const opt = document.createElement('option');
         opt.value = s.id;
-        opt.textContent = `${s.lb} - ${s.nm}`; // โชว์รหัสคู่กับชื่อชุด
+        opt.textContent = `${s.lb} - ${s.nm}`;
         if (s.id === curSet) opt.selected = true;
         sel.appendChild(opt);
       });
@@ -892,14 +920,13 @@
 
     function switchSet(id) {
       curSet = id;
-
-      // อัปเดตสีปุ่มบน PC
-      document.querySelectorAll('.set-tab').forEach((t, i) => t.classList.toggle('active', SETS[i].id === id));
-
-      // อัปเดต Dropdown บนมือถือให้ตรงกัน (เผื่อกดจาก PC แล้วย่อจอ)
+      // PC tabs — ใช้ id attribute แทน index เพื่อรองรับ ALL
+      document.querySelectorAll('.set-tab').forEach(t => {
+        const tid = t.id.replace('tab-', '');
+        t.classList.toggle('active', tid === id);
+      });
       const sel = document.getElementById('setSelect');
       if (sel) sel.value = id;
-
       render();
     }
 
@@ -934,11 +961,25 @@
     }
 
     function render() {
-      const set = SETS.find(s => s.id === curSet);
+      const isAll = curSet === 'all';
+      const set = isAll
+        ? { lb: 'ALL SETS', nm: 'OP-01 → OP-15' }
+        : SETS.find(s => s.id === curSet);
+
       document.getElementById('setId').textContent = set.lb;
       document.getElementById('setTitle').textContent = set.nm;
 
-      const raw = prices[curSet] || {};
+      // รวม card จากทุก set เมื่อเลือก ALL
+      let raw = {};
+      if (isAll) {
+        SETS.forEach(s => {
+          const sd = prices[s.id] || {};
+          Object.entries(sd).forEach(([k, v]) => { if (k !== '_meta') raw[k] = v; });
+        });
+      } else {
+        raw = prices[curSet] || {};
+      }
+
       const topN = parseInt(document.getElementById('topSel').value);
 
       let cards = Object.entries(raw)
@@ -953,9 +994,10 @@
         return ro !== 0 ? ro : (b.jpy || 0) - (a.jpy || 0);
       });
 
+      const totalRaw = Object.keys(raw).filter(k => k !== '_meta').length;
       document.getElementById('fstats').innerHTML =
-        `Showing <b>${cards.length}</b> of <b>${Object.keys(raw).length}</b>`;
-      document.getElementById('setCt').textContent = `${Object.keys(raw).length} entries`;
+        `Showing <b>${cards.length}</b> of <b>${totalRaw}</b>`;
+      document.getElementById('setCt').textContent = `${totalRaw} entries`;
 
       // TOP N
       const banner = document.getElementById('topBanner');
