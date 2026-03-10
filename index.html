@@ -122,18 +122,20 @@
 
 
     .set-tab.all-tab {
-      background: rgba(255,214,10,0.08);
+      background: rgba(255, 214, 10, 0.08);
       color: #ffd60a;
-      border-color: rgba(255,214,10,0.25);
+      border-color: rgba(255, 214, 10, 0.25);
       font-weight: 700;
       letter-spacing: 1px;
     }
+
     .set-tab.all-tab.active {
       background: #ffd60a;
       color: #0a0a0f;
       border-color: #ffd60a;
-      box-shadow: 0 0 14px rgba(255,214,10,.55);
+      box-shadow: 0 0 14px rgba(255, 214, 10, .55);
     }
+
     .set-tab.active {
       background: var(--accent);
       color: #fff;
@@ -794,7 +796,10 @@
       margin-top: 6px;
       flex-wrap: wrap;
     }
-    .char-filter-wrap.visible { display: flex; }
+
+    .char-filter-wrap.visible {
+      display: flex;
+    }
 
     .char-search-box {
       position: relative;
@@ -802,6 +807,7 @@
       min-width: 180px;
       max-width: 340px;
     }
+
     .char-search-input {
       width: 100%;
       background: var(--card);
@@ -815,11 +821,20 @@
       outline: none;
       transition: border-color .15s;
     }
-    .char-search-input:focus { border-color: var(--gold); }
-    .char-search-input::placeholder { color: var(--muted); font-size: 11px; }
+
+    .char-search-input:focus {
+      border-color: var(--gold);
+    }
+
+    .char-search-input::placeholder {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
     .char-clear-ico {
       position: absolute;
-      right: 7px; top: 50%;
+      right: 7px;
+      top: 50%;
       transform: translateY(-50%);
       color: var(--muted);
       font-size: 12px;
@@ -827,13 +842,20 @@
       line-height: 1;
       display: none;
     }
-    .char-clear-ico.show { display: block; }
-    .char-clear-ico:hover { color: var(--accent); }
+
+    .char-clear-ico.show {
+      display: block;
+    }
+
+    .char-clear-ico:hover {
+      color: var(--accent);
+    }
 
     .char-dropdown {
       position: absolute;
       top: calc(100% + 4px);
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       background: #1a1a25;
       border: 1px solid var(--border);
       border-radius: 5px;
@@ -843,7 +865,11 @@
       display: none;
       scrollbar-width: thin;
     }
-    .char-dropdown.open { display: block; }
+
+    .char-dropdown.open {
+      display: block;
+    }
+
     .char-dd-item {
       padding: 6px 10px;
       font-size: 11px;
@@ -856,26 +882,45 @@
       text-overflow: ellipsis;
       transition: background .1s;
     }
-    .char-dd-item:hover, .char-dd-item.selected { background: rgba(255,214,10,.12); color: var(--gold); }
-    .char-dd-empty { padding: 8px 10px; font-size: 11px; color: var(--muted); }
+
+    .char-dd-item:hover,
+    .char-dd-item.selected {
+      background: rgba(255, 214, 10, .12);
+      color: var(--gold);
+    }
+
+    .char-dd-empty {
+      padding: 8px 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
 
     .char-active-badge {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: rgba(255,214,10,.12);
-      border: 1px solid rgba(255,214,10,.4);
+      background: rgba(255, 214, 10, .12);
+      border: 1px solid rgba(255, 214, 10, .4);
       border-radius: 3px;
       padding: 2px 8px;
       font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
       color: var(--gold);
     }
+
     .char-active-badge button {
-      background: none; border: none; color: var(--gold);
-      cursor: pointer; font-size: 12px; line-height: 1; padding: 0;
+      background: none;
+      border: none;
+      color: var(--gold);
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      padding: 0;
     }
-    .char-active-badge button:hover { color: var(--accent); }
+
+    .char-active-badge button:hover {
+      color: var(--accent);
+    }
   </style>
 </head>
 
@@ -917,8 +962,7 @@
     <div class="char-filter-wrap" id="charFilterWrap">
       <span class="filter-label">CHARACTER</span>
       <div class="char-search-box" id="charSearchBox">
-        <input class="char-search-input" id="charSearchInput"
-          placeholder="พิมพ์ชื่อตัวละคร…" autocomplete="off"
+        <input class="char-search-input" id="charSearchInput" placeholder="พิมพ์ชื่อตัวละคร…" autocomplete="off"
           oninput="onCharInput()" onfocus="openCharDD()" onclick="openCharDD()">
         <span class="char-clear-ico" id="charClearIco" onclick="clearChar()">✕</span>
         <div class="char-dropdown" id="charDropdown"></div>
@@ -965,6 +1009,19 @@
 
     const RATE = 0.2011;
     let curSet = 'op01', prices = {}, activeR = new Set(), stockOnly = false, activeChar = '';
+
+    function getBaseCharName(rawName) {
+      if (!rawName) return '';
+
+      // 1. ตัดข้อความในวงเล็บออก เช่น (Parallel), (Super Parallel)
+      let name = rawName.replace(/\s*\(.*?\)/g, '');
+
+      // 2. ตัดคำต่อท้ายที่เป็นเวอร์ชันพิเศษ (Gold, Silver, Bronze, Signature) 
+      // โดยต้องเว้นวรรคก่อนหน้า และอยู่ท้ายสุดของชื่อเท่านั้น (ป้องกันไปตัดชื่อตัวละครอย่าง "Gold Lion Shiki")
+      name = name.replace(/(?:\s+(?:Gold|Silver|Bronze|Signature))+$/i, '');
+
+      return name.trim();
+    }
 
     async function init() {
       buildTabs(); buildChips();
@@ -1103,8 +1160,10 @@
 
       if (activeR.size > 0) cards = cards.filter(c => activeR.has(c.rarity));
       if (stockOnly) cards = cards.filter(c => c.stock);
+      
+      // 🟢 เปลี่ยนมาใช้ฟังก์ชันทำความสะอาดชื่อในการ Filter
       if (activeChar) cards = cards.filter(c => {
-        const base = c.name ? c.name.replace(/\s*\(.*?\)/g, '').trim() : '';
+        const base = getBaseCharName(c.name);
         return base === activeChar;
       });
 
@@ -1231,8 +1290,9 @@
         const sd = prices[s.id] || {};
         Object.values(sd).forEach(v => {
           if (v && v.name) {
-            const base = v.name.replace(/\s*\(.*?\)/g, '').trim();
-            nameSet.add(base);
+            // 🟢 เปลี่ยนมาใช้ฟังก์ชันทำความสะอาดชื่อ
+            const base = getBaseCharName(v.name);
+            if (base) nameSet.add(base);
           }
         });
       });
